@@ -1,4 +1,4 @@
-package PDF_2;
+package PDF2;
 
 public class ders_praktikasi3 {
 
