@@ -1,4 +1,4 @@
-package PDF2;
+package PDF_2;
 
 import java.nio.Buffer;
 import java.util.Iterator;

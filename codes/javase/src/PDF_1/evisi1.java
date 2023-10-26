@@ -1,6 +1,6 @@
-package PDF1;
+package PDF_1;
 
-public class VariablesPracticeHome {
+public class evisi1 {
 	public static void main(String[] args) {
 //		int age=20;
 //		System.out.println("age: " + age);

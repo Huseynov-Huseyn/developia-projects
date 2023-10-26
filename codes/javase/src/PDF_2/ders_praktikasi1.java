@@ -1,6 +1,6 @@
-package PDF2;
+package PDF_2;
 
-public class ders_praktikasi {
+public class ders_praktikasi1{
 
 	public static void main(String[] args) {
 		short a=69;

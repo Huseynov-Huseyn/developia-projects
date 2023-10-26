@@ -1,6 +1,5 @@
-package PDF2;
+package PDF_2;
 
-import java.util.Iterator;
 
 public class Evisi {
 
@@ -17,9 +16,10 @@ public class Evisi {
 			}
 		}
 		
-		for(int b=21;b<=50;b+=2) {
-			System.out.println(b);
-		}
+//		for(int b=21;b<=50;b+=2) {
+//			System.out.println(b);
+//		}
+		
 	}
 
 }
