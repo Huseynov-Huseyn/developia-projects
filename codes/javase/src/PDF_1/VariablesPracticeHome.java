@@ -1,4 +1,4 @@
-package PDF1;
+package PDF_1;
 
 public class VariablesPracticeHome {
 	public static void main(String[] args) {
