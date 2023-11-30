@@ -3,9 +3,7 @@ package Task2;
 public class Cat extends Animal{
 	
 	public Cat(String name,int age) {
-		super();
-		this.name=name;
-		this.age=age;
+		super(name, age);
 	}
 	
 	@Override

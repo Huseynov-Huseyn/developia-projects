@@ -10,5 +10,7 @@ public class Main {
 		
 		Lion lion1=new Lion("Aslan", 7);
 		lion1.makeNoise();
+		
+		
 	}
 }

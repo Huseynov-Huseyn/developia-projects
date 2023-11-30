@@ -6,7 +6,6 @@ public class ModifiersDemo {
 		person p2 = new person(4, 5);
 		person p3 = new person(100);
 		person p4 = new person(2000);
-		System.out.println(p4.b);
 		vurma(2, 3);
 		bolme(12, 3);
 		toplama(10, 20);

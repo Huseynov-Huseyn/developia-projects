@@ -1,0 +1,30 @@
+package ders12;
+
+public class Horse extends Animal {
+	private String color;
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	private String gender;
+	
+	public Horse(String name, int birthday, double weight, String color, String gender) {
+		super(name, birthday, weight);
+		this.color=color;
+		this.gender=gender;
+	}
+
+
+}

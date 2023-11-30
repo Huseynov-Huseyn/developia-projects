@@ -1,9 +1,10 @@
 package ders15;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 
-public class Siyahi {
+public class Siyahi extends ArrayList<Integer>{
 
 	int[] massivim;
 	int index = 0;
@@ -39,17 +40,20 @@ public class Siyahi {
 		return s + "]";
 
 	}
-	public int lazimOlan(int i) {
+	public int lazimOlan(int l) {
 		for(int v=0;v<massivim.length;v++) {
-			if (massivim[v]==i) {
-				i=v;
+			if(massivim[v] != l) {
+				
+			}else {
+				l=v;
 			}
 		}
-		return i;
+		return l;
+		
 	}
 	public void silmek(int x) {
-		 for (int i = x; i < massivim.length - 1; i++) {
-	            massivim[i] = massivim[i + 1];
+		 for (int z = x; z < massivim.length - 1;z++) {
+			 massivim[z] = massivim[z+1];
 	        }
 	}
 	
