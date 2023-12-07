@@ -21,7 +21,8 @@ public class Main {
 		System.out.println(hamisi2);
 		
 		System.out.println("------------");
-		
+		siyahim2.silmek(1);
+		System.out.println(siyahim2.hamisiniQaytar());
 	}
 	
 }

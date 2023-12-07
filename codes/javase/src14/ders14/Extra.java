@@ -1,4 +1,4 @@
-package ders14;
+	package ders14;
 
 public class Extra {
 	public int giveArrayElement(int[] array, int index) throws Exceptionclass{
