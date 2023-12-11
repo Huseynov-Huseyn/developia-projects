@@ -1,5 +1,6 @@
 package az.developia.teacher.entity;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class TeacherEntity {
@@ -11,6 +12,8 @@ public class TeacherEntity {
 	private String address;
 	private String username;
 	private String password;
+	
+	private LocalDateTime registerDate;
 
 	public TeacherEntity(Integer id, String name, String surname, String phone, String address, String username,
 			String password) {
@@ -22,6 +25,10 @@ public class TeacherEntity {
 		this.address = address;
 		this.username = username;
 		this.password = password;
+	}
+
+	public TeacherEntity() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public Integer getId() {
@@ -80,10 +87,19 @@ public class TeacherEntity {
 		this.password = password;
 	}
 
+	public LocalDateTime getRegisterDate() {
+		return registerDate;
+	}
+
+	public void setRegisterDate(LocalDateTime registerDate) {
+		this.registerDate = registerDate;
+	}
+
 	@Override
 	public String toString() {
 		return "TeacherEntity [id=" + id + ", name=" + name + ", surname=" + surname + ", phone=" + phone + ", address="
-				+ address + ", username=" + username + ", password=" + password + "]";
+				+ address + ", username=" + username + ", password=" + password + ", registerDate=" + registerDate
+				+ "]";
 	}
 
 	@Override
