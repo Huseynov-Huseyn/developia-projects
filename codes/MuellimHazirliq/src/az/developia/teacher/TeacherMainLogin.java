@@ -11,7 +11,7 @@ public class TeacherMainLogin {
 		try {
 			
 			if (repository.checkUserIfExists("Huseyn123","neme")){
-				System.out.println("Login oldun");
+				System.out.println("Login oldun");	
 			}else {
 				System.out.println("Fail");
 			}
