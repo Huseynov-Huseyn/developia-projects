@@ -11,18 +11,16 @@ public class TeacherGroupEntity {
 	private String name;
 	private Integer teacherId;
 	private LocalDateTime registerDate;
-	private Integer paymentDate;
-	
-	
+	private Integer paymentDay;
 	
 	public TeacherGroupEntity(Integer id, String name, Integer teacherId, LocalDateTime registerDate,
-			Integer paymentDate) {
+			Integer paymentDay) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.teacherId = teacherId;
 		this.registerDate = registerDate;
-		this.paymentDate = paymentDate;
+		this.paymentDay = paymentDay;
 	}
 	
 	
@@ -50,11 +48,11 @@ public class TeacherGroupEntity {
 	public void setRegisterDate(LocalDateTime registerDate) {
 		this.registerDate = registerDate;
 	}
-	public Integer getPaymentDate() {
-		return paymentDate;
+	public Integer getPaymentDay() {
+		return paymentDay;
 	}
-	public void setPaymentDate(Integer paymentDate) {
-		this.paymentDate = paymentDate;
+	public void setPaymentDate(Integer paymentDay) {
+		this.paymentDay = paymentDay;
 	}
 	
 	
@@ -62,11 +60,11 @@ public class TeacherGroupEntity {
 	@Override
 	public String toString() {
 		return "TeacherGroupEntity [id=" + id + ", name=" + name + ", teacherId=" + teacherId + ", registerDate="
-				+ registerDate + ", paymentDate=" + paymentDate + "]";
+				+ registerDate + ", paymentDate=" + paymentDay + "]";
 	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, name, paymentDate, registerDate, teacherId);
+		return Objects.hash(id, name, paymentDay, registerDate, teacherId);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -78,7 +76,7 @@ public class TeacherGroupEntity {
 			return false;
 		TeacherGroupEntity other = (TeacherGroupEntity) obj;
 		return Objects.equals(id, other.id) && Objects.equals(name, other.name)
-				&& Objects.equals(paymentDate, other.paymentDate) && Objects.equals(registerDate, other.registerDate)
+				&& Objects.equals(paymentDay, other.paymentDay) && Objects.equals(registerDate, other.registerDate)
 				&& Objects.equals(teacherId, other.teacherId);
 	}
 

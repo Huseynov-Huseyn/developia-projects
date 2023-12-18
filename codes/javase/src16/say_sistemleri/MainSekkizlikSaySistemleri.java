@@ -1,13 +1,15 @@
 package say_sistemleri;
 
+import java.util.Iterator;
+
 public class MainSekkizlikSaySistemleri {
 	public static void main(String[] args) {
-		
-		String sekkizlikString="6233";
-		int i=Integer.parseInt(sekkizlikString,8);
+
+		String sekkizlikString = "6233";
+		int i = Integer.parseInt(sekkizlikString, 8);
 		System.out.println(i);
-		
-		String s=Integer.toOctalString(i);
+
+		String s = Integer.toOctalString(i);
 		System.out.println(s);
 	}
 }

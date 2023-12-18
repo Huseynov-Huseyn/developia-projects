@@ -23,9 +23,9 @@ public class TeacherRepository {
 
 		// mysqle gonderilen kod hansi ki oraya yazilaraq datalari
 		// daxil edeceyik
-		String query = "INSERT INTO teachers" + "(name,surname,phone,address,username,password) values" + "('"
+		String query = "INSERT INTO teachers" + "(name,surname,phone,address,username,password,register_date) values" + "('"
 				+ teacher.getName() + "','" + teacher.getSurname() + "','" + teacher.getPhone() + "','"
-				+ teacher.getAddress() + "','" + teacher.getUsername() + "','" + teacher.getPassword() + "');";
+				+ teacher.getAddress() + "','" + teacher.getUsername() + "','" + teacher.getPassword() +  "','" + teacher.getRegisterDate() +"');";
 
 		try {
 			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/java13_teacher?useSSL=false",

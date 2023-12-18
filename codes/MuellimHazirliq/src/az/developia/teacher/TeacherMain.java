@@ -1,5 +1,7 @@
 package az.developia.teacher;
 
+import java.time.LocalDateTime;
+
 import az.developia.teacher.entity.TeacherEntity;
 import az.developia.teacher.exception.OurRuntimeException;
 import az.developia.teacher.repository.TeacherRepository;
@@ -13,8 +15,8 @@ public class TeacherMain {
 		// olur ve bu melumat bazaya yazilmali olduguna gore
 		// servise gonderilir ve servis ise repoya gonderir repo da
 		// cedvele yazir
-		TeacherEntity teacher = new TeacherEntity(null, "Huseyn", "Huseynov", "050-456-23-42", "Baku", "Huseyn123",
-				"neme");
+		TeacherEntity teacher = new TeacherEntity(null, "Huseyn", "Huseynov", "050-456-23-42", "Baku", "Huseyn12233",
+				"nemmm", LocalDateTime.now());
 
 		TeacherRepository repository = new TeacherRepository();
 		try {

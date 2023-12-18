@@ -16,7 +16,7 @@ public class TeacherEntity {
 	private LocalDateTime registerDate;
 
 	public TeacherEntity(Integer id, String name, String surname, String phone, String address, String username,
-			String password) {
+			String password , LocalDateTime registerDate) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -25,6 +25,7 @@ public class TeacherEntity {
 		this.address = address;
 		this.username = username;
 		this.password = password;
+		this.registerDate = registerDate;
 	}
 
 	public TeacherEntity() {
@@ -104,7 +105,7 @@ public class TeacherEntity {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(address, id, name, password, phone, surname, username);
+		return Objects.hash(address, id, name, password, phone, surname, username, registerDate);
 	}
 
 	@Override

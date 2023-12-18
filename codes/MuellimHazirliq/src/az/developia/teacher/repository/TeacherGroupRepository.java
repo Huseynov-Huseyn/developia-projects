@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import az.developia.teacher.Constants;
 import az.developia.teacher.entity.TeacherEntity;
 import az.developia.teacher.entity.TeacherGroupEntity;
 import az.developia.teacher.exception.OurRuntimeException;
@@ -15,14 +16,13 @@ public class TeacherGroupRepository {
 
 		// mysqle gonderilen kod hansi ki oraya yazilaraq datalari
 		// daxil edeceyik
-		String query = "INSERT INTO teacher_groups (name, teacher_id, register_date, payment_date) values " + "('"
+		String query = "INSERT INTO teacher_groups "+ "(name, teacher_id, register_date, payment_day) values " + "('"
 				+ teacher.getName() + "','" + teacher.getTeacherId() + "','" + teacher.getRegisterDate() + "','"
-				+ teacher.getPaymentDate() + "');";
+				+ teacher.getPaymentDay() + "');";
 
 
 		try {
-			Connection conn = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/java13_teacher?useSSL=false&serverTimezone=UTC", "root", "1234");
+			Connection conn = DriverManager.getConnection(Constants.url,Constants.username, Constants.password);
 			Statement st = conn.createStatement();
 
 			st.executeUpdate(query);
