@@ -17,21 +17,8 @@ public class Main20 {
 		name.add("ayxan");
 		name.add("eli");
 		name.add("Huseyn");
-		
-		
-		peyserler(20);
-		
+			
 		Map<String, Integer> nem=new HashMap<>();	
 	}
 	
-	
-	
-	public static void peyserler(int a) {
-		
-		for(int i=1;i<a;i++) {
-			System.out.println("ferid gotten verir");
-		}
-		
-		
-	}
 }
