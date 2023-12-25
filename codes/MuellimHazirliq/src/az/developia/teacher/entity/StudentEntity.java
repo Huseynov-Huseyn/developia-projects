@@ -1,4 +1,4 @@
-	package az.developia.teacher.entity;
+package az.developia.teacher.entity;
 
 import java.time.LocalDate;
 import java.util.Objects;

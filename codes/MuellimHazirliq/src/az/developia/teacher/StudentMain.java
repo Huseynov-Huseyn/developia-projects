@@ -8,11 +8,10 @@ import az.developia.teacher.repository.StudentRepository;
 
 public class StudentMain {
 	public static void main(String[] args) {
-		StudentEntity student= new StudentEntity(null, "Huseyn", "Huseynov", "050-456-23-42", LocalDate.now());
-		StudentRepository repo= new StudentRepository();
-		StudentEntity student1=new StudentEntity();
-		
-		
+		StudentEntity student = new StudentEntity(null, "Huseyn", "Huseynov", "050-456-23-42", LocalDate.now());
+		StudentRepository repo = new StudentRepository();
+		StudentEntity student1 = new StudentEntity();
+
 		repo.add(student);
 		
 //		try {
@@ -20,13 +19,13 @@ public class StudentMain {
 //		} catch (OurRuntimeException e) {
 //			System.out.println(e.getOurMessage());
 //		}
-		
+
 		try {
 			System.out.println(repo.findById(1));
 		} catch (OurRuntimeException e) {
 			System.out.println(e.getOurMessage());
 		}
-		
+
 		try {
 			System.out.println(repo.findAll());
 		} catch (OurRuntimeException e) {
