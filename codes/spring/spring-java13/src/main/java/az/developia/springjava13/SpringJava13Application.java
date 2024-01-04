@@ -24,13 +24,13 @@ public class SpringJava13Application {
 //		}
 		
 		Person personBean=c.getBean(Person.class);
-		System.out.println(personBean.getSalary());
+		System.out.println(personBean.getId());
 		System.out.println("----------");
 		
-		String[] beanNames2=c.getBeanDefinitionNames();
-		for (String beanName2 : beanNames2) {
-			System.out.println(beanName2);
-		}
+//		String[] beanNames2=c.getBeanDefinitionNames();
+//		for (String beanName2 : beanNames2) {
+//			System.out.println(beanName2);
+//		}
 	}
 
 }

@@ -1,0 +1,53 @@
+package az.developia.springjava13.controller;
+
+import java.nio.channels.InterruptedByTimeoutException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+@Controller
+public class HomeController {
+	@GetMapping
+	public String showHome() {
+		return "home";
+	}
+	
+	@GetMapping(path = "/students")
+	public String showStudents(@RequestParam(name="q")String q) {
+		List<String> students=new ArrayList<String>();
+		students.add("Huseyn");
+		students.add("Hseyn");
+		students.add("eyn");
+		
+		List<String> studentsFiltered=new ArrayList<String>();
+		students.stream().forEach(s->{
+			if (s.contains(q)) {
+				studentsFiltered.add(s);
+			}
+		});
+		System.out.println(studentsFiltered);
+		
+		try {
+			Thread.sleep(200);
+		} catch (InterruptedException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return "students";
+	}
+	
+	@GetMapping(path = "/books")
+	public String showBooks() {
+		System.out.println("salam");
+		return "books";
+	}
+	
+	@GetMapping(path = "/computers")
+	public String showComputers() {
+		return "computers";
+	}
+}

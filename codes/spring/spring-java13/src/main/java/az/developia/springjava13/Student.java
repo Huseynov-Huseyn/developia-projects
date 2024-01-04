@@ -23,6 +23,18 @@ public class Student {
 	public String getSurname() {
 		return surname;
 	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
 	
 	
 }
