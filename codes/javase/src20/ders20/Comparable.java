@@ -6,7 +6,6 @@ import java.util.Collections;
 
 public class Comparable {
 	public static void main(String[] args) {
-
 //		ArrayList<String> name = new ArrayList<>();
 //		name.add("Huseyn");
 //		name.add("Eli");

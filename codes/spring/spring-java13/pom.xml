@@ -12,7 +12,7 @@
 	<artifactId>spring-java13</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>spring-java13</name>
-	<description>Bu layihe java 13 qrupu ucundur</description>
+	<description>Bu layihe developia java 13 qrupu ucun yaradilib</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>

@@ -8,13 +8,12 @@ public class Person {
 	private String name;
 	private Integer age;
 	private Integer salary;
-
+	
 	public Person() {
-		super();
-		this.id = 2;
-		this.name = "Huseyn";
-		this.age = 18;
-		this.salary = 0;
+		this.id=10;
+		this.name="huseyn";
+		this.age=18;
+		this.salary=10;
 	}
 
 	public Integer getId() {
@@ -48,5 +47,6 @@ public class Person {
 	public void setSalary(Integer salary) {
 		this.salary = salary;
 	}
-
+	
+	
 }
