@@ -38,14 +38,11 @@ public class HomeController {
 		return "students";
 	}
 
-	@GetMapping(path = "/books")
-	public String showBooks() {
-		System.out.println("salam");
-		return "books";
-	}
 
 	@GetMapping(path = "/computers")
 	public String showComputers() {
 		return "computers";
 	}
+	
+
 }

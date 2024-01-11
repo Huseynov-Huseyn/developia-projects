@@ -24,8 +24,8 @@ public class SpringJava13Application {
 //		Employee employeeBean = c.getBean("myEmployee2", Employee.class);
 //		System.out.println(employeeBean.getName());
 
-		Home homeBeanHome =c.getBean(Home.class);
-		Home homeBeanHome2 =c.getBean(Home.class);
+		Home homeBeanHome = c.getBean(Home.class);
+		Home homeBeanHome2 = c.getBean(Home.class);
 //		
 //		String[] beanNames= c.getBeanDefinitionNames();
 //		
