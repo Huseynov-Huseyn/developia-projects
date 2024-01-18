@@ -15,6 +15,6 @@ public class ExceptionHandler2 {
 	public String handle(OurRuntimeException e) {
 //		e.getBr().getFieldErrors().get(0).getField(); datatype adını
 		
-		return e.getBr().getFieldErrors().get(0).getDefaultMessage();
+		return e.getBr().getFieldErrors().get(0).getField()+": "+ e.getBr().getFieldErrors().get(0).getDefaultMessage() ;
 	}
 }
