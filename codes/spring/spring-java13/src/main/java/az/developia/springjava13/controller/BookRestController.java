@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import az.developia.springjava13.component.Book;
 import az.developia.springjava13.exception.OurRuntimeException;
 import az.developia.springjava13.repository.BookRepository;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(path="/books")
@@ -19,7 +20,7 @@ public class BookRestController {
 	private BookRepository repository;
 	
 	@PostMapping(path="/add")
-	public void add(@RequestBody Book b,BindingResult br){
+	public void add(@Valid @RequestBody Book b,BindingResult br){
 		if(br.hasErrors()){
 			throw new OurRuntimeException(br);
 		}

@@ -46,12 +46,12 @@ public class Home {
 	public String toString() {
 		return "Home [id=" + id + ", address=" + address + ", color=" + color + "]";
 	}
-	@PostConstruct
-	public void init() {
-		System.out.println("init");
-	}
-	@PreDestroy
-	public void destroy() {
-		System.out.println("destroy");
-	}
+//	@PostConstruct
+//	public void init() {
+//		System.out.println("init");
+//	}
+//	@PreDestroy
+//	public void destroy() {
+//		System.out.println("destroy");
+//	}
 }

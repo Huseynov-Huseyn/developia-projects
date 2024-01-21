@@ -11,8 +11,10 @@ public class SpringJava13Application {
 
 	public static void main(String[] args) {
 		ConfigurableApplicationContext c = SpringApplication.run(SpringJava13Application.class, args);
-
+		
+		System.out.println("---------------------");
 		System.out.println("Everything is OK!,sir");
+		System.out.println("---------------------");
 //		=Student studentBean = c.getBean("myStudent1", Student.class);
 //		System.out.println(studentBean.getName());
 //		System.out.println("----------");

@@ -26,19 +26,12 @@ public class Book {
 
 	@Column(columnDefinition = "TEXT")
 	private String author;
-
-	private Integer pageCount;
+	
+	@Column(columnDefinition = "INT")
+	private Integer page_count;
 
 	public Book() {
 		// TODO Auto-generated constructor stub
-	}
-
-	public Book(String name, String price, String author, Integer pageCount) {
-		super();
-		this.name = name;
-		this.price = price;
-		this.author = author;
-		this.pageCount = pageCount;
 	}
 
 	public Integer getId() {
@@ -73,18 +66,19 @@ public class Book {
 		this.author = author;
 	}
 
-	public Integer getPageCount() {
-		return pageCount;
+	public Integer getPage_count() {
+		return page_count;
 	}
 
-	public void setPageCount(Integer pageCount) {
-		this.pageCount = pageCount;
+	public void setPage_count(Integer page_count) {
+		this.page_count = page_count;
 	}
 
 	@Override
 	public String toString() {
-		return "Book [id=" + id + ", name=" + name + ", price=" + price + ", author=" + author + ", pageCount="
-				+ pageCount + "]";
+		return "Book [id=" + id + ", name=" + name + ", price=" + price + ", author=" + author + ", page_count="
+				+ page_count + "]";
 	}
-
+	
+	
 }

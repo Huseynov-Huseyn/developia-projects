@@ -69,13 +69,13 @@ public class Computer {
 				+ "]";
 	}
 
-	@PostConstruct
-	public void init() {
-		System.out.println("init method");
-	}
-
-	@PreDestroy
-	public void destroy() {
-		System.out.println("destroy method");
-	}
+//	@PostConstruct
+//	public void init() {
+//		System.out.println("init method");
+//	}
+//
+//	@PreDestroy
+//	public void destroy() {
+//		System.out.println("destroy method");
+//	}
 }

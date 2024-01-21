@@ -46,5 +46,10 @@ public class HomeController {
 		return "computers";
 	}
 	
+	@GetMapping(path = "/books")
+	public String showBooks() {
+		System.out.println("salam");
+		return "books";
+	}
 	
 }

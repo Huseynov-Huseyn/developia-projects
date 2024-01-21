@@ -19,19 +19,24 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping(path = "/students")
 public class StudentRestController {
-
+	
 	@Autowired
 	private StudentRepository repository;
+	
+//	@GetMapping
+//	public List<String> getStudents() {
+//		List<String> students = new ArrayList<String>();
+//		students.add("Huseyn");
+//		students.add("Hseyn");
+//		students.add("eyn");
+//		return students;
+//	}
 
+	
 	@GetMapping
-	public List<String> getStudents() {
-		List<String> students = new ArrayList<String>();
-		students.add("Huseyn");
-		students.add("Hseyn");
-		students.add("eyn");
-		return students;
+	public List<Student> getStudents(){
+		return repository.findAll();
 	}
-
 //	@RequestBody arxada avtomatik olaraq studenti component annotasiyasina baglayir
 	@PostMapping(path = "/add")
 	public void add(@Valid @RequestBody Student s, BindingResult br) {
