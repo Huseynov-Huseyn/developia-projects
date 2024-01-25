@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import az.developia.springjava13.component.Student;
 import az.developia.springjava13.exception.OurRuntimeException;
 import az.developia.springjava13.repository.StudentRepository;
+import az.developia.springjava13.response.StudentResponse;
 import jakarta.validation.Valid;
 
 @RestController
@@ -27,8 +28,11 @@ public class StudentRestController {
 	private StudentRepository repository;
 
 	@GetMapping
-	public List<Student> getStudents() {
-		return repository.findAll();
+	public StudentResponse getStudents() {
+		StudentResponse response = new StudentResponse();
+		response.setStudents(repository.findAll());
+		response.setUsername("anonim");
+		return response;
 	}
 
 	@GetMapping(path = "/{id}")
