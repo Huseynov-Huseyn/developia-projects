@@ -2,22 +2,15 @@ package az.developia.springjava13.response;
 
 import java.util.List;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ExceptionResponse {
 	private String message;
 	private List<ValidationResponse> valdation;
-	
-	public String getMessage() {
-		return message;
-	}
-	public void setMessage(String message) {
-		this.message = message;
-	}
-	public List<ValidationResponse> getValdation() {
-		return valdation;
-	}
-	public void setValdation(List<ValidationResponse> valdation) {
-		this.valdation = valdation;
-	}
-	
-	
+
 }

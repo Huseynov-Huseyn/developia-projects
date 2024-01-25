@@ -1,6 +1,5 @@
 package az.developia.springjava13.controller;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import az.developia.springjava13.component.Student;
+import az.developia.springjava13.dto.StudentDTO;
 import az.developia.springjava13.exception.OurRuntimeException;
 import az.developia.springjava13.repository.StudentRepository;
 import az.developia.springjava13.response.StudentResponse;
@@ -52,12 +52,17 @@ public class StudentRestController {
 
 //	@RequestBody arxada avtomatik olaraq studenti component annotasiyasina baglayir
 	@PostMapping(path = "/add")
-	public void add(@Valid @RequestBody Student s, BindingResult br) {
+	public void add(@Valid @RequestBody StudentDTO s, BindingResult br) {
 		if (br.hasErrors()) {
 			throw new OurRuntimeException(br, "melumatlarin tamligi pozulub");
 		}
-		s.setId(null);
-		repository.save(s);
+		
+		Student st= new Student();
+		st.setId(null);
+		st.setName(s.getName());
+		st.setSurname(s.getSurname());
+		
+		repository.save(st);
 	}
 
 	@PutMapping(path = "/update")
