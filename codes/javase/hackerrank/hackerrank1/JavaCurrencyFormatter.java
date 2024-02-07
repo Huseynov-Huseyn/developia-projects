@@ -7,7 +7,7 @@ public class JavaCurrencyFormatter {
 		Scanner scanner = new Scanner(System.in);
 		double payment = scanner.nextDouble();
 		scanner.close();
-
+		
 		String us = "$" + payment;
 		String india = "Rs." + payment;
 		String china = "￥" + payment;
