@@ -22,7 +22,7 @@ public class ExceptionHandler2 {
 	public ExceptionResponse handle(OurRuntimeException e) {
 //		e.getBr().getFieldErrors().get(0).getField(); datatype adını
 		ExceptionResponse r = new ExceptionResponse();
-
+		
 		BindingResult br = e.getBr();
 		if (br == null) {
 

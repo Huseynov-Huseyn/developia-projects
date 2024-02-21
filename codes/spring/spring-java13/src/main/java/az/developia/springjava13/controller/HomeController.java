@@ -52,4 +52,8 @@ public class HomeController {
 		return "books";
 	}
 	
+	@GetMapping(path = "/employee")
+	public String showEmployee() {
+		return "employee";
+	}
 }

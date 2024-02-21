@@ -1,6 +1,6 @@
 package az.developia.springjava13.component;
 
-import org.springframework.stereotype.Component;
+	import org.springframework.stereotype.Component;
 
 @Component(value = "myEmployee1")
 public class Employee {
@@ -8,7 +8,6 @@ public class Employee {
 	private String name;
 	private Integer age;
 	private String salary;
-
 	private Computer computer;
 
 	public Employee() {
