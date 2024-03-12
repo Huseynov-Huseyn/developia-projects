@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Builder
-public class TeacherDTO {
+public class AuthorDTO {
 
 	@Min(value = 0, message = "Id menfi olmaz")
 	private Integer id;

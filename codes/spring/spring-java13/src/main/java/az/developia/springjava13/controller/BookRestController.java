@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import az.developia.springjava13.component.Book;
+import az.developia.springjava13.entity.BookEntity;
 import az.developia.springjava13.exception.OurRuntimeException;
 import az.developia.springjava13.repository.BookRepository;
 import jakarta.validation.Valid;
@@ -27,13 +27,13 @@ public class BookRestController {
 	private BookRepository repository;
 
 	@GetMapping
-	public List<Book> getStudents() {
+	public List<BookEntity> getStudents() {
 		return repository.findAll();
 	}
 
 	@GetMapping(path = "/{id}")
-	public Book findById(@PathVariable Integer id) {
-		Optional<Book> o = repository.findById(id);
+	public BookEntity findById(@PathVariable Integer id) {
+		Optional<BookEntity> o = repository.findById(id);
 
 		if (id == null || id <= 0) {
 			throw new OurRuntimeException(null, "id mutleqdir");
@@ -47,7 +47,7 @@ public class BookRestController {
 	}
 
 	@PostMapping(path = "/add")
-	public void add(@Valid @RequestBody Book b, BindingResult br) {
+	public void add(@Valid @RequestBody BookEntity b, BindingResult br) {
 		if (br.hasErrors()) {
 			throw new OurRuntimeException(br, "melumatlarin tamligi pozulub");
 		}
@@ -56,7 +56,7 @@ public class BookRestController {
 	}
 
 	@PutMapping(path = "/update")
-	public void update(@Valid @RequestBody Book b, BindingResult br) {
+	public void update(@Valid @RequestBody BookEntity b, BindingResult br) {
 		if (br.hasErrors()) {
 			throw new OurRuntimeException(br, "melumatlarin tamligi pozulub");
 		}
