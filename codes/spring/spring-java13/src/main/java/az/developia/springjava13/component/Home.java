@@ -3,8 +3,6 @@ package az.developia.springjava13.component;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import jakarta.annotation.PostConstruct;
-import jakarta.annotation.PreDestroy;
 @Scope("prototype")
 @Component
 public class Home {
@@ -13,9 +11,9 @@ public class Home {
 	private String color;
 
 	public Home() {
-		this.id=1;
-		this.address="Baku";
-		this.color="red";
+		this.id = 1;
+		this.address = "Baku";
+		this.color = "red";
 	}
 
 	public Integer getId() {

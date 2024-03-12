@@ -56,17 +56,17 @@ public class StudentRestController {
 		if (br.hasErrors()) {
 			throw new OurRuntimeException(br, "melumatlarin tamligi pozulub");
 		}
-		
-		Student st= new Student();
+
+		Student st = new Student();
 		st.setId(null);
 		st.setName(s.getName());
 		st.setSurname(s.getSurname());
-		
 		repository.save(st);
+		
 	}
 
 	@PutMapping(path = "/update")
-	public void update(@Valid @RequestBody Student s, BindingResult br) {
+	public void update(@Valid @RequestBody StudentDTO s, BindingResult br) {
 		if (br.hasErrors()) {
 			throw new OurRuntimeException(br, "melumatlarin tamligi pozulub");
 		}
@@ -74,14 +74,21 @@ public class StudentRestController {
 		if (s.getId() == null || s.getId() <= 0) {
 			throw new OurRuntimeException(null, "id null olmaz");
 		}
+		Student st = new Student();
+		st.setId(s.getId());
+		st.setName(s.getName());
+		st.setSurname(s.getSurname());
+		st.setUsername(s.getUsername());
 
 		if (repository.findById(s.getId()).isPresent()) {
-			repository.save(s);
+			repository.save(st);
+
 		} else {
 			throw new OurRuntimeException(null, "bu id tapilmadi");
 		}
 
-		repository.save(s);
+		repository.save(st);
+
 	}
 
 	/// student/id

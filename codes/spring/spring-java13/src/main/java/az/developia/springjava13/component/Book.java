@@ -1,7 +1,5 @@
 package az.developia.springjava13.component;
 
-import org.attoparser.dom.Text;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,7 +24,7 @@ public class Book {
 
 	@Column(columnDefinition = "TEXT")
 	private String author;
-	
+
 	@Column(columnDefinition = "INT")
 	private Integer page_count;
 
@@ -79,6 +77,5 @@ public class Book {
 		return "Book [id=" + id + ", name=" + name + ", price=" + price + ", author=" + author + ", page_count="
 				+ page_count + "]";
 	}
-	
-	
+
 }

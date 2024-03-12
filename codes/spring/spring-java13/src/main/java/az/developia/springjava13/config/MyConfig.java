@@ -2,7 +2,6 @@ package az.developia.springjava13.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 
 import az.developia.springjava13.component.Computer;
 import az.developia.springjava13.component.Employee;
@@ -36,7 +35,7 @@ public class MyConfig {
 		r.setSpeed("1000MB/SEC");
 		return r;
 	}
-	
+
 	@Bean
 	public Employee myEmployee2() {
 		Employee e = new Employee();
