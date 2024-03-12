@@ -6,13 +6,13 @@ import org.springframework.context.annotation.Configuration;
 import az.developia.springjava13.component.Computer;
 import az.developia.springjava13.component.Employee;
 import az.developia.springjava13.component.Ram;
-import az.developia.springjava13.component.Student;
+import az.developia.springjava13.entity.StudentEntity;
 
 @Configuration
 public class MyConfig {
 	@Bean
-	public Student myStudent2() {
-		Student s = new Student();
+	public StudentEntity myStudent2() {
+		StudentEntity s = new StudentEntity();
 		s.setId(12);
 		s.setName("Huseyn");
 		return s;

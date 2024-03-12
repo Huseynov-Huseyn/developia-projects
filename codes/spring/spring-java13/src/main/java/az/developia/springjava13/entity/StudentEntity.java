@@ -1,4 +1,4 @@
-package az.developia.springjava13.component;
+package az.developia.springjava13.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,13 +11,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Entity
+@Table(name = "students")
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "students")
-public class Student {
+public class StudentEntity {
 	// primary key id-dir
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

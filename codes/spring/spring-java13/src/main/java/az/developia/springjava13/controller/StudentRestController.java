@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import az.developia.springjava13.component.Student;
 import az.developia.springjava13.dto.StudentDTO;
+import az.developia.springjava13.entity.StudentEntity;
 import az.developia.springjava13.exception.OurRuntimeException;
 import az.developia.springjava13.repository.StudentRepository;
 import az.developia.springjava13.response.StudentResponse;
@@ -36,8 +36,8 @@ public class StudentRestController {
 	}
 
 	@GetMapping(path = "/{id}")
-	public Student findById(@PathVariable Integer id) {
-		Optional<Student> o = repository.findById(id);
+	public StudentEntity findById(@PathVariable Integer id) {
+		Optional<StudentEntity> o = repository.findById(id);
 
 		if (id == null || id <= 0) {
 			throw new OurRuntimeException(null, "id mutleqdir");
@@ -57,12 +57,12 @@ public class StudentRestController {
 			throw new OurRuntimeException(br, "melumatlarin tamligi pozulub");
 		}
 
-		Student st = new Student();
+		StudentEntity st = new StudentEntity();
 		st.setId(null);
 		st.setName(s.getName());
 		st.setSurname(s.getSurname());
 		repository.save(st);
-		
+
 	}
 
 	@PutMapping(path = "/update")
@@ -74,7 +74,7 @@ public class StudentRestController {
 		if (s.getId() == null || s.getId() <= 0) {
 			throw new OurRuntimeException(null, "id null olmaz");
 		}
-		Student st = new Student();
+		StudentEntity st = new StudentEntity();
 		st.setId(s.getId());
 		st.setName(s.getName());
 		st.setSurname(s.getSurname());

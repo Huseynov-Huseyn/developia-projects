@@ -2,7 +2,7 @@ package az.developia.springjava13.response;
 
 import java.util.List;
 
-import az.developia.springjava13.component.Student;
+import az.developia.springjava13.entity.StudentEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class StudentResponse {
-	private List<Student> students;
+	private List<StudentEntity> students;
 	private String username;
 
 }
