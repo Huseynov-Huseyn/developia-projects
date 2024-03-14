@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Configuration;
 
 import az.developia.springjava13.component.Computer;
 import az.developia.springjava13.component.Employee;
-import az.developia.springjava13.component.Ram;
 import az.developia.springjava13.entity.StudentEntity;
 
 @Configuration
@@ -28,13 +27,13 @@ public class MyConfig {
 		return c;
 	}
 
-	@Bean
-	public Ram myRam1() {
-		Ram r = new Ram();
-		r.setPrice(120);
-		r.setSpeed("1000MB/SEC");
-		return r;
-	}
+//	@Bean
+//	public Ram myRam1() {
+//		Ram r = new Ram();
+//		r.setPrice(120);
+//		r.setSpeed("1000MB/SEC");
+//		return r;
+//	}
 
 	@Bean
 	public Employee myEmployee2() {

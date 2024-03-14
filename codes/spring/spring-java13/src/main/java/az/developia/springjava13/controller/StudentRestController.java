@@ -2,7 +2,10 @@ package az.developia.springjava13.controller;
 
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +21,6 @@ import az.developia.springjava13.entity.StudentEntity;
 import az.developia.springjava13.exception.OurRuntimeException;
 import az.developia.springjava13.repository.StudentRepository;
 import az.developia.springjava13.response.StudentResponse;
-import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(path = "/students")
@@ -52,6 +54,7 @@ public class StudentRestController {
 
 //	@RequestBody arxada avtomatik olaraq studenti component annotasiyasina baglayir
 	@PostMapping(path = "/add")
+	@PreAuthorize(value = "hasAuthority('ROLE_ADD_STUDENT')")
 	public void add(@Valid @RequestBody StudentDTO s, BindingResult br) {
 		if (br.hasErrors()) {
 			throw new OurRuntimeException(br, "melumatlarin tamligi pozulub");
