@@ -2,6 +2,8 @@ package az.developia.springjava13.controller;
 
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,7 +20,6 @@ import az.developia.springjava13.entity.StudentEntity;
 import az.developia.springjava13.exception.OurRuntimeException;
 import az.developia.springjava13.repository.StudentRepository;
 import az.developia.springjava13.response.StudentResponse;
-import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(path = "/students")
@@ -62,6 +63,8 @@ public class StudentRestController {
 		st.setId(null);
 		st.setName(s.getName());
 		st.setSurname(s.getSurname());
+		st.setUsername(s.getUsername());
+		st.setPassword(s.getPassword());
 		repository.save(st);
 
 	}
