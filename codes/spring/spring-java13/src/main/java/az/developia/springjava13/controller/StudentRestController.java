@@ -30,6 +30,7 @@ public class StudentRestController {
 	private StudentRepository repository;
 
 	@GetMapping
+	@PreAuthorize(value = "hasAuthority('ROLE_GET_STUDENT')")
 	public StudentResponse getStudents() {
 		StudentResponse response = new StudentResponse();
 		response.setStudents(repository.findAll());
@@ -38,6 +39,7 @@ public class StudentRestController {
 	}
 
 	@GetMapping(path = "/{id}")
+	@PreAuthorize(value = "hasAuthority('ROLE_GET_STUDENT')")
 	public StudentEntity findById(@PathVariable Integer id) {
 		Optional<StudentEntity> o = repository.findById(id);
 
@@ -69,6 +71,7 @@ public class StudentRestController {
 	}
 
 	@PutMapping(path = "/update")
+	@PreAuthorize(value = "hasAuthority('ROLE_UPDATE_STUDENT')")
 	public void update(@Valid @RequestBody StudentDTO s, BindingResult br) {
 		if (br.hasErrors()) {
 			throw new OurRuntimeException(br, "melumatlarin tamligi pozulub");
@@ -96,6 +99,7 @@ public class StudentRestController {
 
 	/// student/id
 	@DeleteMapping(path = "/{id}")
+	@PreAuthorize(value = "hasAuthority('ROLE_DELETE_STUDENT')")
 	public void delete(@PathVariable Integer id) {
 		if (id == null || id <= 0) {
 			throw new OurRuntimeException(null, "id mutleqdir");

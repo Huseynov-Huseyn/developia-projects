@@ -10,9 +10,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "authoritires")
+@Table(name = "authorities")
 @Getter
 @Setter
+
 public class AuthorityEntity {
 
 	@Id

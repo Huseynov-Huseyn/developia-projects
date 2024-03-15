@@ -69,11 +69,6 @@ public class UserRestController {
 		return true;
 	}
 
-	@GetMapping(path = "/login")
-	public void login() {
-
-	}
-
 	@PostMapping(path = "/author")
 	public void createAuthor(@RequestBody AuthorDTO a) {
 		Optional<UserEntity> findById = userRepository.findById(a.getUsername());
@@ -96,5 +91,10 @@ public class UserRestController {
 		user.setEnabled(1);
 		user.setType("Author");
 		userRepository.save(user);
+	}
+
+	@GetMapping(path = "/login")
+	public void login() {
+
 	}
 }
