@@ -3,8 +3,6 @@ package az.developia.springjava13.controller;
 import java.util.List;
 import java.util.Optional;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import az.developia.springjava13.entity.BookEntity;
 import az.developia.springjava13.exception.OurRuntimeException;
 import az.developia.springjava13.repository.BookRepository;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(path = "/books")

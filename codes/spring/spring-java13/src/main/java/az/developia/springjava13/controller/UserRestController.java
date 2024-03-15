@@ -13,12 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 import az.developia.springjava13.dto.AuthorDTO;
 import az.developia.springjava13.dto.TeacherDTO;
 import az.developia.springjava13.entity.AuthorEntity;
-import az.developia.springjava13.entity.AuthorityEntity;
 import az.developia.springjava13.entity.TeacherEntity;
 import az.developia.springjava13.entity.UserEntity;
 import az.developia.springjava13.exception.OurRuntimeException;
 import az.developia.springjava13.repository.AuthorRepository;
-import az.developia.springjava13.repository.AuthorityRepository;
 import az.developia.springjava13.repository.TeacherRepository;
 import az.developia.springjava13.repository.UserRepository;
 
@@ -34,9 +32,6 @@ public class UserRestController {
 
 	@Autowired
 	private AuthorRepository authorRepository;
-
-	@Autowired
-	private AuthorityRepository authorityRepository;
 
 	@PostMapping(path = "/teacher")
 	public boolean reateTeacher(@RequestBody TeacherDTO d) {
@@ -60,11 +55,6 @@ public class UserRestController {
 		user.setEnabled(1);
 		user.setType("teacher");
 		userRepository.save(user);
-
-		AuthorityEntity a1 = new AuthorityEntity();
-		a1.setUsername(user.getUsername());
-		a1.setAuthority("ROLE_ADD_STUDENT");
-		authorityRepository.save(a1);
 
 		return true;
 	}
