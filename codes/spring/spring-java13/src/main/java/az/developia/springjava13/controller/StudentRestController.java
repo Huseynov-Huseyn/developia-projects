@@ -1,11 +1,13 @@
 package az.developia.springjava13.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,8 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import az.developia.springjava13.dto.StudentDTO;
 import az.developia.springjava13.entity.StudentEntity;
+import az.developia.springjava13.entity.TeacherEntity;
 import az.developia.springjava13.exception.OurRuntimeException;
 import az.developia.springjava13.repository.StudentRepository;
+import az.developia.springjava13.repository.TeacherRepository;
 import az.developia.springjava13.response.StudentResponse;
 
 @RestController
@@ -29,16 +33,28 @@ public class StudentRestController {
 	@Autowired
 	private StudentRepository repository;
 
+	@Autowired
+	private TeacherRepository teacherRepository;
+
 	@GetMapping
 
+	@PreAuthorize(value = "hasAuthority('ROLE_GET_STUDENT')")
 	public StudentResponse getStudents() {
 		StudentResponse response = new StudentResponse();
-		response.setStudents(repository.findAll());
-		response.setUsername("anonim");
+
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		TeacherEntity operatorTeacher = teacherRepository.findByUsername(username);
+		Integer teacherId = operatorTeacher.getId();
+
+		List<StudentEntity> list = repository.findAllByTeacherId(teacherId);
+
+		response.setStudents(list);
+		response.setUsername(username);
 		return response;
 	}
 
 	@GetMapping(path = "/{id}")
+	@PreAuthorize(value = "hasAuthority('ROLE_GET_STUDENT')")
 	public StudentEntity findById(@PathVariable Integer id) {
 		Optional<StudentEntity> o = repository.findById(id);
 
@@ -61,17 +77,21 @@ public class StudentRestController {
 			throw new OurRuntimeException(br, "melumatlarin tamligi pozulub");
 		}
 
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		TeacherEntity operatorTeacher = teacherRepository.findByUsername(username);
+		Integer teacherId = operatorTeacher.getId();
+
 		StudentEntity st = new StudentEntity();
 		st.setId(null);
 		st.setName(s.getName());
 		st.setSurname(s.getSurname());
-		st.setUsername(s.getUsername());
-		st.setPassword(s.getPassword());
+		st.setTeacherId(teacherId);
 		repository.save(st);
 
 	}
 
 	@PutMapping(path = "/update")
+	@PreAuthorize(value = "hasAuthority('ROLE_UPDATE_STUDENT')")
 	public void update(@Valid @RequestBody StudentDTO s, BindingResult br) {
 		if (br.hasErrors()) {
 			throw new OurRuntimeException(br, "melumatlarin tamligi pozulub");
@@ -84,7 +104,6 @@ public class StudentRestController {
 		st.setId(s.getId());
 		st.setName(s.getName());
 		st.setSurname(s.getSurname());
-		st.setUsername(s.getUsername());
 
 		if (repository.findById(s.getId()).isPresent()) {
 			repository.save(st);
@@ -99,7 +118,9 @@ public class StudentRestController {
 
 	/// student/id
 	@DeleteMapping(path = "/{id}")
+	@PreAuthorize(value = "hasAuthority('ROLE_DELETE_STUDENT')")
 	public void delete(@PathVariable Integer id) {
+
 		if (id == null || id <= 0) {
 			throw new OurRuntimeException(null, "id mutleqdir");
 		}

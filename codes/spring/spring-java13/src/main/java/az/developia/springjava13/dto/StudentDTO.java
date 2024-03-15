@@ -39,4 +39,5 @@ public class StudentDTO {
 	@Pattern(regexp = "[a-z]+@[a-z]+\\.[a-z]{2,4}", message = "emaili duz yaz")
 	private String email;
 
+	private Integer teacherId;
 }

@@ -3,6 +3,7 @@ package az.developia.springjava13.controller;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +22,7 @@ import az.developia.springjava13.repository.AuthorRepository;
 import az.developia.springjava13.repository.AuthorityRepository;
 import az.developia.springjava13.repository.TeacherRepository;
 import az.developia.springjava13.repository.UserRepository;
+import ch.qos.logback.core.pattern.color.BoldCyanCompositeConverter;
 
 @RestController
 @RequestMapping(path = "/users")
@@ -40,6 +42,7 @@ public class UserRestController {
 
 	@PostMapping(path = "/teacher")
 	public boolean reateTeacher(@RequestBody TeacherDTO d) {
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		Optional<UserEntity> findById = userRepository.findById(d.getUsername());
 
 		if (findById.isPresent()) {
@@ -55,7 +58,10 @@ public class UserRestController {
 
 		UserEntity user = new UserEntity();
 		user.setUsername(d.getUsername());
-		user.setPassword(d.getPassword());
+
+		String raw = d.getPassword();
+		String pass = "{bcrypt}" + encoder.encode(raw);
+		user.setPassword(pass);
 		user.setEmail(d.getEmail());
 		user.setEnabled(1);
 		user.setType("teacher");
