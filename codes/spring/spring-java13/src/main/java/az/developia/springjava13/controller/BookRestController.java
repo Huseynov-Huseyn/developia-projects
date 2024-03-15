@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,6 +49,7 @@ public class BookRestController {
 	}
 
 	@PostMapping(path = "/add")
+	@PreAuthorize(value = "hasAuthority('ROLE_ADD_BOOK')")
 	public void add(@Valid @RequestBody BookEntity b, BindingResult br) {
 		if (br.hasErrors()) {
 			throw new OurRuntimeException(br, "melumatlarin tamligi pozulub");

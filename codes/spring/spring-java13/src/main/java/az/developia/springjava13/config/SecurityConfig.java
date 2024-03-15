@@ -14,7 +14,7 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)	
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
@@ -28,7 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.csrf().disable().authorizeRequests().antMatchers(HttpMethod.POST, "/users/teacher").permitAll()
+		http.csrf().disable().authorizeRequests().antMatchers(HttpMethod.POST, "/users/author").permitAll()
 
 				.antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 

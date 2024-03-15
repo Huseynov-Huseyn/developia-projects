@@ -91,6 +91,11 @@ public class UserRestController {
 		user.setEnabled(1);
 		user.setType("Author");
 		userRepository.save(user);
+
+		AuthorityEntity a1 = new AuthorityEntity();
+		a1.setUsername(user.getUsername());
+		a1.setAuthority("ROLE_ADD_BOOK");
+		authorityRepository.save(a1);
 	}
 
 	@GetMapping(path = "/login")
