@@ -8,10 +8,9 @@ public class LinkedHash_Set {
 //		kimi cap edilir(hashsetde xususi olaraq capa gedir) 
 //		ve null deyeri hashsetdeki kimi
 //		birinci sirada olmur
-		
-		
-		LinkedHashSet lh= new LinkedHashSet();
-		
+
+		LinkedHashSet lh = new LinkedHashSet();
+
 		lh.add("Bazar ertəsi");
 		lh.add("Çərşənbə axşamı");
 		lh.add("Çərşənbə");
@@ -19,10 +18,10 @@ public class LinkedHash_Set {
 		lh.add("Cümə");
 		lh.add("Şənbə");
 		lh.add("Bazar");
-		
+
 		lh.add(null);
 		lh.add("Çərşənbə");
 		lh.remove("Bazar");
-		lh.forEach(Item -> System.out.println(Item +""));
+		lh.forEach(Item -> System.out.println(Item + ""));
 	}
 }

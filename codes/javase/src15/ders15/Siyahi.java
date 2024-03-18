@@ -1,19 +1,18 @@
 package ders15;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 
-public class Siyahi extends ArrayList<Integer>{
+public class Siyahi extends ArrayList<Integer> {
 
 	int[] massivim;
 	int index = 0;
-	int inc=0;
-	public Siyahi(int initial,int increment) {
-		massivim=new int[initial];
-		this.inc=increment;		
+	int inc = 0;
+
+	public Siyahi(int initial, int increment) {
+		massivim = new int[initial];
+		this.inc = increment;
 	}
-	
+
 	public void yenisi(int i) {
 		if (index == massivim.length) {
 			int[] yeniMassiv = new int[massivim.length + inc];
@@ -30,31 +29,33 @@ public class Siyahi extends ArrayList<Integer>{
 
 	public String hamisiniQaytar() {
 		String s = "[";
-		for(int i=0;i<index;i++) {
-			if(index==i+1) {
-				s=s+massivim[i];
-			}else {
-				s=s+massivim[i]+",";
-			}			
+		for (int i = 0; i < index; i++) {
+			if (index == i + 1) {
+				s = s + massivim[i];
+			} else {
+				s = s + massivim[i] + ",";
+			}
 		}
 		return s + "]";
 
 	}
+
 	public int lazimOlan(int l) {
-		for(int v=0;v<massivim.length;v++) {
-			if(massivim[v] != l) {
-				
-			}else {
-				l=v;
+		for (int v = 0; v < massivim.length; v++) {
+			if (massivim[v] != l) {
+
+			} else {
+				l = v;
 			}
 		}
 		return l;
-		
+
 	}
+
 	public void silmek(int x) {
-		 for (int z = x; z < massivim.length - 1;z++) {
-			 massivim[z] = massivim[z+1];
-	        }
+		for (int z = x; z < massivim.length - 1; z++) {
+			massivim[z] = massivim[z + 1];
+		}
 	}
-	
+
 }

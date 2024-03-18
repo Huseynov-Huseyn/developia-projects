@@ -1,8 +1,6 @@
 package d8;
 
-import java.nio.Buffer;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.Random;
 
 public class derspraktikasi2 {

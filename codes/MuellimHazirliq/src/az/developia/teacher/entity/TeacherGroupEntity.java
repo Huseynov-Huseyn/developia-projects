@@ -1,8 +1,6 @@
 package az.developia.teacher.entity;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Objects;
 
 public class TeacherGroupEntity {
@@ -22,6 +20,7 @@ public class TeacherGroupEntity {
 		this.registerDate = registerDate;
 		this.paymentDay = paymentDay;
 	}
+
 	public TeacherGroupEntity() {
 		// TODO Auto-generated constructor stub
 	}

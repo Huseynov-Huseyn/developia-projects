@@ -1,8 +1,7 @@
 package Set;
 
 import java.util.HashSet;
-import java.awt.event.ItemEvent;
-import java.util.*;
+import java.util.Iterator;
 
 public class Hash_Set {
 	public static void main(String[] args) {

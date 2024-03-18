@@ -105,7 +105,7 @@ public class TeacherRepository {
 				entity.setPassword(rs.getString("password"));
 
 			} else {
-				
+
 			}
 
 			conn.close();
@@ -153,16 +153,14 @@ public class TeacherRepository {
 
 		return entities;
 	}
-	
-	
-	
-	public void deleteById(Integer id)throws OurRuntimeException {
-		
+
+	public void deleteById(Integer id) throws OurRuntimeException {
+
 		String query = "delete from teachers where id=" + id;
 		try {
-			Connection conn = DriverManager.getConnection(Constants.url,Constants.username,Constants.password);
+			Connection conn = DriverManager.getConnection(Constants.url, Constants.username, Constants.password);
 			Statement st = conn.createStatement();
-			
+
 			st.executeUpdate(query);
 			conn.close();
 

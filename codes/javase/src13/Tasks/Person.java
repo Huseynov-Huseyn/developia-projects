@@ -7,7 +7,7 @@ public class Person {
 	int age;
 	String phone;
 	String address;
-		
+
 	public Person(int id, String name, String surname, int age, String phone, String address) {
 		super();
 		this.id = id;
@@ -41,7 +41,7 @@ public class Person {
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
-	
+
 	public int getAge() {
 		return age;
 	}
@@ -67,12 +67,12 @@ public class Person {
 	}
 
 	public void prinInfo() {
-		System.out.println("Id:"+id);
-		System.out.println("name:"+name);
-		System.out.println("surname:"+surname);
-		System.out.println("age:"+age);
-		System.out.println("phone:"+phone);
-		System.out.println("address:"+address);
+		System.out.println("Id:" + id);
+		System.out.println("name:" + name);
+		System.out.println("surname:" + surname);
+		System.out.println("age:" + age);
+		System.out.println("phone:" + phone);
+		System.out.println("address:" + address);
 	}
-	
+
 }

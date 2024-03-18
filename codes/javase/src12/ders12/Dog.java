@@ -2,6 +2,7 @@ package ders12;
 
 public class Dog extends Animal {
 	private String color;
+
 	public String getColor() {
 		return color;
 	}
@@ -19,11 +20,11 @@ public class Dog extends Animal {
 	}
 
 	private String gender;
-	
+
 	public Dog(String name, int birthday, double weight, String color, String gender) {
 		super(name, birthday, weight);
-		this.color=color;
-		this.gender=gender;
+		this.color = color;
+		this.gender = gender;
 	}
 
 }

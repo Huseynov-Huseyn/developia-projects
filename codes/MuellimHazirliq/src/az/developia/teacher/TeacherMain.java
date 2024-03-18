@@ -20,17 +20,17 @@ public class TeacherMain {
 
 		TeacherRepository repository = new TeacherRepository();
 		try {
-			
-			if (repository.checkUsernameIfExists(teacher.getUsername())){
+
+			if (repository.checkUsernameIfExists(teacher.getUsername())) {
 				System.out.println("Bu username artiq movcuddur");
-			}else {
+			} else {
 				repository.add(teacher);
 			}
-			
+
 		} catch (OurRuntimeException e) {
 			System.out.println(e.getOurMessage());
 		}
-		
+
 		// burada bu entity de olan melumatlari teachers cedveline gondermek
 		// lazimdir ve bunun ucun JDBC kitabxanasini istifade edeceyik
 

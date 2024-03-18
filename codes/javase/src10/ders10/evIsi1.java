@@ -4,11 +4,11 @@ import java.util.Arrays;
 
 public class evIsi1 {
 	public static void main(String[] args) {
-		String name="Meherrem";
+		String name = "Meherrem";
 		System.out.println(name);
-		System.out.println("-------");		
-		
-		String message="Java dilini öyrənmək maraqlı və faydalıdır";
+		System.out.println("-------");
+
+		String message = "Java dilini öyrənmək maraqlı və faydalıdır";
 		System.out.println(message);
 		System.out.println(message.length());
 		System.out.println(message.charAt(7));
@@ -18,16 +18,16 @@ public class evIsi1 {
 		System.out.println(message.isBlank());
 		System.out.println("-------");
 
-		name=" Ayxan ";
+		name = " Ayxan ";
 		System.out.println(name.trim());
 		System.out.println("-------");
 
-		name="«Kamil»";
-		System.out.println(name.substring(0,5));
+		name = "«Kamil»";
+		System.out.println(name.substring(0, 5));
 		System.out.println("-------");
-	
-		name="«Hüseyn Mehdizadə»";
-		String[] s2=name.split(" ");
+
+		name = "«Hüseyn Mehdizadə»";
+		String[] s2 = name.split(" ");
 		System.out.println(Arrays.toString(s2));
 	}
 }

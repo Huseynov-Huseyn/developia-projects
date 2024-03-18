@@ -1,19 +1,14 @@
 package az.developia.teacher;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
-
-import az.developia.teacher.entity.TeacherGroupEntity;
 import az.developia.teacher.exception.OurRuntimeException;
 import az.developia.teacher.repository.TeacherGroupRepository;
 
 public class TeacherMainGroup {
-	
+
 	public static void main(String[] args) {
 //		TeacherGroupEntity teacher=new TeacherGroupEntity(null, "HUsseyn", 9, LocalDateTime.of(2020, 12,18,11,10,17), 15);
-		
-		TeacherGroupRepository repository=new TeacherGroupRepository();
+
+		TeacherGroupRepository repository = new TeacherGroupRepository();
 //		repository.add(teacher);
 //	
 //		try {
@@ -27,7 +22,7 @@ public class TeacherMainGroup {
 		} catch (OurRuntimeException e) {
 			System.out.println(e.getOurMessage());
 		}
-		
+
 		try {
 			System.out.println(repository.findByAll(9));
 		} catch (OurRuntimeException e) {

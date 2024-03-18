@@ -12,11 +12,11 @@ public class TeacherEntity {
 	private String address;
 	private String username;
 	private String password;
-	
+
 	private LocalDateTime registerDate;
 
 	public TeacherEntity(Integer id, String name, String surname, String phone, String address, String username,
-			String password , LocalDateTime registerDate) {
+			String password, LocalDateTime registerDate) {
 		super();
 		this.id = id;
 		this.name = name;

@@ -1,13 +1,10 @@
 package az.developia.teacher.repository;
 
-import java.io.ObjectInputStream.GetField;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-
-import javax.swing.text.html.parser.Entity;
 
 import az.developia.teacher.Constants;
 import az.developia.teacher.entity.StudentEntity;
@@ -43,7 +40,7 @@ public class StudentRepository {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		
+
 	}
 
 	public StudentEntity findById(int id) {

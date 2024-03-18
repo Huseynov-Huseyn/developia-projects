@@ -1,8 +1,6 @@
 package ders20;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 
 public class Comparable {
 	public static void main(String[] args) {
@@ -23,9 +21,9 @@ public class Comparable {
 		persons.add(new Person(1, "Huseyn", "Huseynov", "050-456-23-42"));
 		persons.add(new Person(3, "Ayxan", "Mirzezade", "055-426-53-92"));
 		persons.add(new Person(2, "Rustem", "Huseynov", "070-656-73-82"));
-	
+
 		System.out.println(persons);
-		
+
 //		Collections.sort(persons);
 	}
 }

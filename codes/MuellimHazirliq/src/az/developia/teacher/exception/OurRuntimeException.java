@@ -6,7 +6,8 @@ public class OurRuntimeException extends RuntimeException {
 	public String getOurMessage() {
 		return ourMessage;
 	}
+
 	public OurRuntimeException(String m) {
-		this.ourMessage=m;
+		this.ourMessage = m;
 	}
 }

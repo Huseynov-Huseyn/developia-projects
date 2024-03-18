@@ -1,7 +1,5 @@
 package say_sistemleri;
 
-import java.util.Iterator;
-
 public class MainSekkizlikSaySistemleri {
 	public static void main(String[] args) {
 

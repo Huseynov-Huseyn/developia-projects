@@ -13,7 +13,7 @@ public class StudentMain {
 		StudentEntity student1 = new StudentEntity();
 
 		repo.add(student);
-		
+
 //		try {
 //			repo.deleteById(2);
 //		} catch (OurRuntimeException e) {
