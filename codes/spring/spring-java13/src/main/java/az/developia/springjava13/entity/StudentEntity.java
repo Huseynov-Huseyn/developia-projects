@@ -29,6 +29,8 @@ public class StudentEntity {
 
 	private String surname;
 
+	private String username;
+
 	private Integer teacherId;
 
 }

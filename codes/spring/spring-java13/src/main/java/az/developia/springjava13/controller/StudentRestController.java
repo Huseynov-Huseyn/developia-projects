@@ -22,8 +22,10 @@ import az.developia.springjava13.dto.StudentDTO;
 import az.developia.springjava13.entity.StudentEntity;
 import az.developia.springjava13.entity.TeacherEntity;
 import az.developia.springjava13.exception.OurRuntimeException;
+import az.developia.springjava13.repository.AuthorityRepository;
 import az.developia.springjava13.repository.StudentRepository;
 import az.developia.springjava13.repository.TeacherRepository;
+import az.developia.springjava13.repository.UserRepository;
 import az.developia.springjava13.response.StudentResponse;
 
 @RestController
@@ -34,10 +36,15 @@ public class StudentRestController {
 	private StudentRepository repository;
 
 	@Autowired
+	private UserRepository userRepository;
+
+	@Autowired
+	private AuthorityRepository authorityRepository;
+
+	@Autowired
 	private TeacherRepository teacherRepository;
 
 	@GetMapping
-
 	@PreAuthorize(value = "hasAuthority('ROLE_GET_STUDENT')")
 	public StudentResponse getStudents() {
 		StudentResponse response = new StudentResponse();
@@ -47,6 +54,21 @@ public class StudentRestController {
 		Integer teacherId = operatorTeacher.getId();
 
 		List<StudentEntity> list = repository.findAllByTeacherId(teacherId);
+
+//		Bu olan zaman daxilindeki bir varaible gondermek olmur sadece elementi elemek olur
+//		list.stream().forEach(System.out::println);
+
+//		bu artiq asagidakin tam eynisidir
+		list.stream().map(s -> {
+			return s.getName();
+		}).filter(s->{
+			return s.contains("H");
+		})
+		.forEach(System.out::println);
+
+//		for (StudentEntity student : list) {
+//			System.out.println(student.getName());
+//		}
 
 		response.setStudents(list);
 		response.setUsername(username);
@@ -92,7 +114,7 @@ public class StudentRestController {
 
 	@PutMapping(path = "/update")
 	@PreAuthorize(value = "hasAuthority('ROLE_UPDATE_STUDENT')")
-	public void update(@Valid @RequestBody StudentDTO s, BindingResult br) {
+	public void update(@Valid @RequestBody StudentEntity s, BindingResult br) {
 		if (br.hasErrors()) {
 			throw new OurRuntimeException(br, "melumatlarin tamligi pozulub");
 		}
@@ -121,18 +143,28 @@ public class StudentRestController {
 	@PreAuthorize(value = "hasAuthority('ROLE_DELETE_STUDENT')")
 	public void delete(@PathVariable Integer id) {
 
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		TeacherEntity operator = teacherRepository.findByUsername(username);
+		if (operator == null) {
+			throw new OurRuntimeException(null, "muellim tapilmadi");
+		}
+		Integer teacherId = operator.getId();
+
 		if (id == null || id <= 0) {
 			throw new OurRuntimeException(null, "id mutleqdir");
 		}
 
-		if (repository.findById(id).isPresent()) {
+		StudentEntity ent = repository.findById(id).orElseThrow(() -> new OurRuntimeException(null, "id tapilmadi "));
+
+		if (ent.getTeacherId() == teacherId) {
 			repository.deleteById(id);
+			userRepository.deleteById(ent.getUsername());
+
+			authorityRepository.deleteUserAuthorities(ent.getUsername());
 		} else {
-			throw new OurRuntimeException(null, "bu id tapilmadi");
+
+			throw new OurRuntimeException(null, "oz telebeni sil");
+
 		}
-
-		repository.deleteById(id);
-
 	}
-
 }

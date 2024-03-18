@@ -2,7 +2,6 @@ package az.developia.springjava13.dto;
 
 import java.time.LocalDate;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
@@ -17,10 +16,6 @@ import lombok.Data;
 @Builder
 public class StudentDTO {
 
-	@NotNull(message = "id mutleqdir")
-	@Min(value = 0, message = "Id menfi olmaz")
-	private Integer id;
-
 	@Size(min = 2, max = 40, message = "Ad min 2 max 40 ola biler")
 	private String name;
 
@@ -28,9 +23,11 @@ public class StudentDTO {
 	private String surname;
 
 	@Size(min = 2, max = 20, message = "Username min 2 max 20 ola biler")
+	@NotNull
 	private String username;
 
 	@Size(min = 6, max = 20, message = "Password min 6 max 20 ola biler")
+	@NotNull
 	private String password;
 
 	@Past(message = "kecmis zaman olmalidir")

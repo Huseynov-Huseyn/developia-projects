@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping(path="/home")
+@RequestMapping(path = "/home")
 public class HomeController {
 	@GetMapping
 	public String showHome() {
@@ -40,18 +40,17 @@ public class HomeController {
 		return "students";
 	}
 
-
 	@GetMapping(path = "/computers")
 	public String showComputers() {
 		return "computers";
 	}
-	
+
 	@GetMapping(path = "/books")
 	public String showBooks() {
 		System.out.println("salam");
 		return "books";
 	}
-	
+
 	@GetMapping(path = "/employee")
 	public String showEmployee() {
 		return "employee";
