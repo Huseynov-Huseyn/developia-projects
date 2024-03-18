@@ -27,6 +27,7 @@ import az.developia.springjava13.entity.UserEntity;
 import az.developia.springjava13.exception.OurRuntimeException;
 import az.developia.springjava13.repository.AuthorRepository;
 import az.developia.springjava13.repository.AuthorityRepository;
+import az.developia.springjava13.repository.BookRepository;
 import az.developia.springjava13.repository.StudentRepository;
 import az.developia.springjava13.repository.TeacherRepository;
 import az.developia.springjava13.repository.UserRepository;
@@ -54,6 +55,9 @@ public class UserRestController {
 
 	@Autowired
 	private AuthorRepository authorRepository;
+
+	@Autowired
+	private BookRepository bookRepository;
 
 	@PostMapping(path = "/teacher")
 	public boolean createTeacher(@Valid @RequestBody TeacherDTO d) {
@@ -138,6 +142,8 @@ public class UserRestController {
 
 	@PostMapping(path = "/author")
 	public void createAuthor(@Valid @RequestBody AuthorDTO a) {
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
 		Optional<UserEntity> findById = userRepository.findById(a.getUsername());
 		if (findById.isPresent()) {
 			throw new OurRuntimeException(null, "Username istifade edilir");
@@ -153,7 +159,11 @@ public class UserRestController {
 
 		UserEntity user = new UserEntity();
 		user.setUsername(a.getUsername());
-		user.setPassword(a.getPassword());
+
+		String raw = a.getPassword();
+		String pass = "{bcrypt}" + encoder.encode(raw);
+
+		user.setPassword(pass);
 		user.setEmail(a.getEmail());
 		user.setEnabled(1);
 		user.setType("Author");

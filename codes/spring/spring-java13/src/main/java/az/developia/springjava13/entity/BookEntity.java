@@ -37,6 +37,6 @@ public class BookEntity {
 	private Integer page_count;
 
 	@Column(columnDefinition = "TEXT")
-	private String author;
+	private Integer authorId;
 
 }

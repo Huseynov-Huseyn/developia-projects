@@ -4,7 +4,6 @@ import java.time.LocalDate;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
@@ -26,14 +25,14 @@ public class StudentDTO {
 	@NotNull
 	private String username;
 
-	@Size(min = 6, max = 20, message = "Password min 6 max 20 ola biler")
+	@Size(min = 2, max = 20, message = "Password min 6 max 20 ola biler")
 	@NotNull
 	private String password;
 
 	@Past(message = "kecmis zaman olmalidir")
 	private LocalDate birthday;
 
-	@Pattern(regexp = "[a-z]+@[a-z]+\\.[a-z]{2,4}", message = "emaili duz yaz")
+//	@Pattern(regexp = "[a-z]+@[a-z]+\\.[a-z]{2,4}", message = "emaili duz yaz")
 	private String email;
 
 	private Integer teacherId;

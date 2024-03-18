@@ -6,4 +6,6 @@ import az.developia.springjava13.entity.AuthorEntity;
 
 public interface AuthorRepository extends JpaRepository<AuthorEntity, Integer> {
 
+	AuthorEntity findByUsername(String username);
+
 }

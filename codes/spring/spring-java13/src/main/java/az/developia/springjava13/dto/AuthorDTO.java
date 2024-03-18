@@ -1,7 +1,6 @@
 package az.developia.springjava13.dto;
 
 import javax.validation.constraints.Min;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
@@ -25,9 +24,9 @@ public class AuthorDTO {
 	@Size(min = 2, max = 20, message = "Username min 2 max 20 ola biler")
 	private String username;
 
-	@Size(min = 6, max = 20, message = "Password min 6 max 20 ola biler")
+	@Size(min = 2, max = 20, message = "Password min 6 max 20 ola biler")
 	private String password;
 
-	@Pattern(regexp = "[a-z]+@[a-z]+\\.[a-z]{2,4}", message = "emaili duz yaz")
+//	@Pattern(regexp = "[a-z]+@[a-z]+\\.[a-z]{2,4}", message = "emaili duz yaz")
 	private String email;
 }

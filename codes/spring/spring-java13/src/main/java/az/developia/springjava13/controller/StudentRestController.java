@@ -61,10 +61,9 @@ public class StudentRestController {
 //		bu artiq asagidakin tam eynisidir
 		list.stream().map(s -> {
 			return s.getName();
-		}).filter(s->{
-			return s.contains("H");
-		})
-		.forEach(System.out::println);
+		}).filter(s -> s.contains("H")
+
+		).forEach(System.out::println);
 
 //		for (StudentEntity student : list) {
 //			System.out.println(student.getName());
