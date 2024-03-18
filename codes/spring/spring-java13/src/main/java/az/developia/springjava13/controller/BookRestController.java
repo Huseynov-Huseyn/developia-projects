@@ -23,6 +23,7 @@ import az.developia.springjava13.entity.BookEntity;
 import az.developia.springjava13.exception.OurRuntimeException;
 import az.developia.springjava13.repository.AuthorRepository;
 import az.developia.springjava13.repository.BookRepository;
+import az.developia.springjava13.repository.UserRepository;
 import az.developia.springjava13.response.BookResponse;
 
 @RestController
@@ -31,6 +32,9 @@ public class BookRestController {
 
 	@Autowired
 	private BookRepository repository;
+
+	@Autowired
+	private UserRepository userRepository;
 
 	@Autowired
 	private AuthorRepository authorRepository;
@@ -108,17 +112,29 @@ public class BookRestController {
 	@DeleteMapping(path = "/{id}")
 	@PreAuthorize(value = "hasAuthority('ROLE_DELETE_BOOK')")
 	public void delete(@PathVariable Integer id) {
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		AuthorEntity operator = authorRepository.findByUsername(username);
+		if (operator == null) {
+			throw new OurRuntimeException(null, "muellim tapilmadi");
+
+		}
+
+		Integer authorId = operator.getId();
+
 		if (id == null || id <= 0) {
 			throw new OurRuntimeException(null, "id mutleqdir");
 		}
 
-		if (repository.findById(id).isPresent()) {
-			repository.deleteById(id);
-		} else {
-			throw new OurRuntimeException(null, "bu id tapilmadi");
-		}
+		BookEntity ent = repository.findById(id).orElseThrow(() -> new OurRuntimeException(null, "Id tapilmadi"));
 
-		repository.deleteById(id);
+		if (ent.getId() == authorId) {
+			repository.deleteById(id);
+			userRepository.deleteById(ent.getName());
+
+			authorRepository.deleteById(ent.getId());
+		} else {
+			throw new OurRuntimeException(null, "oz telebeni sil");
+		}
 
 	}
 }
