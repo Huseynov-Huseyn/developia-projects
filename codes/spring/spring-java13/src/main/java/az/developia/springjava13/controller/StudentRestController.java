@@ -2,6 +2,8 @@ package az.developia.springjava13.controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 import javax.validation.Valid;
 
@@ -59,11 +61,27 @@ public class StudentRestController {
 //		list.stream().forEach(System.out::println);
 
 //		bu artiq asagidakin tam eynisidir
-		list.stream().map(s -> {
-			return s.getName();
-		}).filter(s -> s.contains("H")
 
-		).forEach(System.out::println);
+		Function<StudentEntity, String> func = new Function<>() {
+
+			@Override
+			public String apply(StudentEntity t) {
+				// TODO Auto-generated method stub
+				return t.getName();
+			}
+
+		};
+
+		Predicate<String> pre = new Predicate<String>() {
+
+			@Override
+			public boolean test(String t) {
+				// TODO Auto-generated method stub
+				return t.contains("H");
+			}
+
+		};
+		list.stream().map(func).filter(pre).forEach(System.out::println);
 
 //		for (StudentEntity student : list) {
 //			System.out.println(student.getName());
@@ -101,6 +119,10 @@ public class StudentRestController {
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		TeacherEntity operatorTeacher = teacherRepository.findByUsername(username);
 		Integer teacherId = operatorTeacher.getId();
+
+		if (s.getTeacherId() != teacherId) {
+			throw new OurRuntimeException(br, "basqa muellime telebe qeyd etmek olmaz");
+		}
 
 		StudentEntity st = new StudentEntity();
 		st.setId(null);
