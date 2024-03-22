@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telebeler</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+    body{
+        background-color: #252525;
+    }
+       table {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 600px; /* Örnek bir maksimum genişlik */
+            margin: 20px auto; /* Tabloyu ortalamak için */
+            
+        }
+        
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        
+        th {
+            background-color: #4CAF50; /* Başlık hücrelerinin arka plan rengi */
+            color: white; /* Başlık metin rengi */
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2; /* Çift satırların arka plan rengi */
+        }
+        tr:nth-child(2n+1) {
+            background-color: #4CAF50; /* Çift satırların arka plan rengi */
+        }
+    </style>
+</head>
+<body>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Surname</th>
+            </tr>
+        </thead>
+    
+        <tbody id="students">
+            
+        </tbody>
+    </table>
+
+
+
+<script src="js/students.js"></script>
+</body>
+</html>
