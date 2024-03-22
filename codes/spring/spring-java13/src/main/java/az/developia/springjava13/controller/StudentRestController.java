@@ -29,9 +29,12 @@ import az.developia.springjava13.repository.StudentRepository;
 import az.developia.springjava13.repository.TeacherRepository;
 import az.developia.springjava13.repository.UserRepository;
 import az.developia.springjava13.response.StudentResponse;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping(path = "/students")
+@Api(description = "Telebelerle bagli API-lar")
 public class StudentRestController {
 
 	@Autowired
@@ -48,6 +51,7 @@ public class StudentRestController {
 
 	@GetMapping
 	@PreAuthorize(value = "hasAuthority('ROLE_GET_STUDENT')")
+	@ApiOperation(value = "Butun telebeleri qaytaran API ", notes = "Burada elave qeydler yazilir")
 	public StudentResponse getStudents() {
 		StudentResponse response = new StudentResponse();
 
