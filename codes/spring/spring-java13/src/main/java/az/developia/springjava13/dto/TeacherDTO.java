@@ -1,7 +1,6 @@
 package az.developia.springjava13.dto;
 
 import javax.validation.constraints.Min;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
@@ -28,6 +27,6 @@ public class TeacherDTO {
 	@Size(min = 6, max = 20, message = "Password min 6 max 20 ola biler")
 	private String password;
 
-	@Pattern(regexp = "[a-z]+@[a-z]+\\.[a-z]{2,4}", message = "emaili duz yaz")
+//	@Pattern(regexp = "[a-z]+@[a-z]+\\.[a-z]{2,4}", message = "emaili duz yaz")
 	private String email;
 }
