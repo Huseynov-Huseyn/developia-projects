@@ -20,8 +20,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import az.developia.springjava13.dto.StudentDTO;
+import az.developia.springjava13.dto.StudentUpdateMeDTO;
 import az.developia.springjava13.entity.StudentEntity;
 import az.developia.springjava13.entity.TeacherEntity;
+import az.developia.springjava13.entity.UserEntity;
 import az.developia.springjava13.exception.OurRuntimeException;
 import az.developia.springjava13.repository.AuthorityRepository;
 import az.developia.springjava13.repository.StudentRepository;
@@ -55,13 +57,19 @@ public class StudentRestController {
 	public StudentResponse getStudents() {
 		StudentResponse response = new StudentResponse();
 
-		List<StudentEntity> list = repository.findAll();
+//		List<StudentEntity> list = repository.findAll();
 
-//		Bu olan zaman daxilindeki bir varaible gondermek olmur sadece elementi elemek olur
-//		list.stream().forEach(System.out::println);
-
-//		bu artiq asagidakin tam eynisidir
-
+		List<StudentEntity> list = repository.findAllSearch("a", "b");
+//		asagidaki ile eyni isi gorur
+//		
+//		List<StudentEntity> filtered = list.stream().filter(s -> {
+//			boolean re = false;
+//			if (s.getName().contains("a") && s.getSurname().contains("b")) {
+//				re = true;
+//			}
+//			return re;
+//		}).collect(Collectors.toList());
+//
 		response.setStudents(list);
 
 		return response;
@@ -70,16 +78,12 @@ public class StudentRestController {
 	@GetMapping(path = "/{id}")
 	@PreAuthorize(value = "hasAuthority('ROLE_GET_STUDENT')")
 	public StudentEntity findById(@PathVariable Integer id) {
-		Optional<StudentEntity> o = repository.findById(id);
 
 		if (id == null || id <= 0) {
 			throw new OurRuntimeException(null, "id mutleqdir");
 		}
-		if (o.isPresent()) {
-			return o.get();
-		} else {
-			throw new OurRuntimeException(null, "bu id tapilmadi");
-		}
+
+		return repository.findById(id).orElseThrow(() -> new OurRuntimeException(null, "bu id tapilmadi"));
 
 	}
 
@@ -108,7 +112,7 @@ public class StudentRestController {
 
 	}
 
-	@PutMapping(path = "/update")
+	@PutMapping
 	@PreAuthorize(value = "hasAuthority('ROLE_UPDATE_STUDENT')")
 	public void update(@Valid @RequestBody StudentEntity s, BindingResult br) {
 		if (br.hasErrors()) {
@@ -163,4 +167,30 @@ public class StudentRestController {
 
 		}
 	}
+
+	@PutMapping
+	@PreAuthorize(value = "hasAuthority('ROLE_UPDATE_ME')")
+//	{username:'yeniUsername'}
+	public void updateMe(@RequestBody StudentUpdateMeDTO req) {
+		String newUsername = req.getUsername();
+
+		if (newUsername == null) {
+			// throw
+		}
+
+//		bu kod emeliyyati edenin username i verir
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+
+		if (newUsername.equals(username)) {
+			// throw
+		}
+		Optional<UserEntity> f = userRepository.findById(username);
+		if (f.isPresent()) {
+			// throw
+		} else {
+			userRepository.updateMyUsername(username, newUsername);
+		}
+
+	}
+
 }

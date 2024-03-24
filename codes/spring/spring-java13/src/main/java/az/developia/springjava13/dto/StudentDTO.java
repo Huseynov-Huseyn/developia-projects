@@ -36,7 +36,7 @@ public class StudentDTO {
 	@Past(message = "kecmis zaman olmalidir")
 	private LocalDate birthday;
 
-//	@Pattern(regexp = "[a-z]+@[a-z]+\\.[a-z]{2,4}", message = "emaili duz yaz")
+//	@Pattern(regexp = "[\w-\.]+@([\w-]+\.)+[\w-]{2,4}", message = "emaili duz yaz")
 	private String email;
 
 	private Integer teacherId;
