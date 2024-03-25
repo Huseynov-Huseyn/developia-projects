@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import az.developia.springjava13.dto.AuthorDTO;
-import az.developia.springjava13.dto.StudentDTO;
 import az.developia.springjava13.dto.TeacherDTO;
 import az.developia.springjava13.entity.AuthorEntity;
 import az.developia.springjava13.entity.AuthorityEntity;
@@ -31,6 +30,7 @@ import az.developia.springjava13.repository.BookRepository;
 import az.developia.springjava13.repository.StudentRepository;
 import az.developia.springjava13.repository.TeacherRepository;
 import az.developia.springjava13.repository.UserRepository;
+import az.developia.springjava13.request.StudentAddRequest;
 
 @RestController
 @RequestMapping(path = "/users")
@@ -96,7 +96,7 @@ public class UserRestController {
 
 	@PostMapping(path = "/student")
 	@PreAuthorize(value = "hasAuthority('ROLE_ADD_STUDENT')")
-	public boolean createStudent(@Valid @RequestBody StudentDTO d, BindingResult br) {
+	public boolean createStudent(@Valid @RequestBody StudentAddRequest d, BindingResult br) {
 		if (br.hasErrors()) {
 			throw new OurRuntimeException(br, "melumatlarin tamligi pozulub");
 		}

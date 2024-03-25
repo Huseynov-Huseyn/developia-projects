@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
@@ -19,17 +20,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import az.developia.springjava13.dto.StudentDTO;
 import az.developia.springjava13.dto.StudentUpdateMeDTO;
 import az.developia.springjava13.entity.StudentEntity;
 import az.developia.springjava13.entity.TeacherEntity;
 import az.developia.springjava13.entity.UserEntity;
 import az.developia.springjava13.exception.OurRuntimeException;
-import az.developia.springjava13.repository.AuthorityRepository;
-import az.developia.springjava13.repository.StudentRepository;
-import az.developia.springjava13.repository.TeacherRepository;
-import az.developia.springjava13.repository.UserRepository;
+import az.developia.springjava13.request.StudentAddRequest;
 import az.developia.springjava13.response.StudentResponse;
+import az.developia.springjava13.service.StudentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
@@ -40,16 +38,7 @@ import io.swagger.annotations.ApiOperation;
 public class StudentRestController {
 
 	@Autowired
-	private StudentRepository repository;
-
-	@Autowired
-	private UserRepository userRepository;
-
-	@Autowired
-	private AuthorityRepository authorityRepository;
-
-	@Autowired
-	private TeacherRepository teacherRepository;
+	private StudentService service;
 
 	@GetMapping
 //	@PreAuthorize(value = "hasAuthority('ROLE_GET_STUDENT')")
@@ -57,9 +46,9 @@ public class StudentRestController {
 	public StudentResponse getStudents() {
 		StudentResponse response = new StudentResponse();
 
-//		List<StudentEntity> list = repository.findAll();
+		List<StudentEntity> list = repository.findAll();
 
-		List<StudentEntity> list = repository.findAllSearch("a", "b");
+//		List<StudentEntity> list = repository.findAllSearch("a", "b");
 //		asagidaki ile eyni isi gorur
 //		
 //		List<StudentEntity> filtered = list.stream().filter(s -> {
@@ -90,26 +79,13 @@ public class StudentRestController {
 //	@RequestBody arxada avtomatik olaraq studenti component annotasiyasina baglayir
 	@PostMapping(path = "/add")
 	@PreAuthorize(value = "hasAuthority('ROLE_ADD_STUDENT')")
-	public void add(@Valid @RequestBody StudentDTO s, BindingResult br) {
+	public ResponseEntity<Object> add(@Valid @RequestBody StudentAddRequest dto, BindingResult br) {
 		if (br.hasErrors()) {
 			throw new OurRuntimeException(br, "melumatlarin tamligi pozulub");
 		}
+		ResponseEntity<Object> resp = service.add(dto);
 
-		String username = SecurityContextHolder.getContext().getAuthentication().getName();
-		TeacherEntity operatorTeacher = teacherRepository.findByUsername(username);
-		Integer teacherId = operatorTeacher.getId();
-
-		if (s.getTeacherId() != teacherId) {
-			throw new OurRuntimeException(br, "basqa muellime telebe qeyd etmek olmaz");
-		}
-
-		StudentEntity st = new StudentEntity();
-		st.setId(null);
-		st.setName(s.getName());
-		st.setSurname(s.getSurname());
-		st.setTeacherId(teacherId);
-		repository.save(st);
-
+		return resp;
 	}
 
 	@PutMapping
@@ -168,7 +144,7 @@ public class StudentRestController {
 		}
 	}
 
-	@PutMapping
+	@PutMapping(path = "/update-me")
 	@PreAuthorize(value = "hasAuthority('ROLE_UPDATE_ME')")
 //	{username:'yeniUsername'}
 	public void updateMe(@RequestBody StudentUpdateMeDTO req) {

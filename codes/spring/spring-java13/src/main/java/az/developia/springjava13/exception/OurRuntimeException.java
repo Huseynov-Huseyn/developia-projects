@@ -2,7 +2,7 @@ package az.developia.springjava13.exception;
 
 import org.springframework.validation.BindingResult;
 
-import az.developia.springjava13.dto.StudentDTO;
+import az.developia.springjava13.request.StudentAddRequest;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -20,6 +20,6 @@ public class OurRuntimeException extends RuntimeException {
 
 //		builder daha dinamikdir cunki yeni constructor yaratmirsan 
 //		StudentDTO f=new StudentDTO("Umid","Alesgerov");
-		StudentDTO f = StudentDTO.builder().name("Umid").surname("Alesgerov").build();
+		StudentAddRequest f = StudentAddRequest.builder().name("Umid").surname("Alesgerov").build();
 	}
 }
