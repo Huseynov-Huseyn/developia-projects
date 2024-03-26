@@ -31,7 +31,6 @@ public class StudentEntity {
 	private String surname;
 
 	@NotNull
-//	@Bizimkiler(value = "dea") // eve calisma
 	private String username;
 
 	private Integer teacherId;

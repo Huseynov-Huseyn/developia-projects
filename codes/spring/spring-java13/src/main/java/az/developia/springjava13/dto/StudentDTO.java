@@ -20,6 +20,8 @@ public class StudentDTO {
 
 	@Size(min = 2, max = 40, message = "Ad min 2 max 40 ola biler")
 	@ApiModelProperty(notes = "Bura telebenin adidir")
+//	@ValidationUserType 
+//	yuxaridaki custom validationdir
 	private String name;
 
 	@Size(min = 2, max = 40, message = "Soyad min 2 max 40 ola biler")
