@@ -25,9 +25,13 @@ import az.developia.springjava13.entity.StudentEntity;
 import az.developia.springjava13.entity.TeacherEntity;
 import az.developia.springjava13.entity.UserEntity;
 import az.developia.springjava13.exception.OurRuntimeException;
+import az.developia.springjava13.repository.AuthorityRepository;
+import az.developia.springjava13.repository.TeacherRepository;
+import az.developia.springjava13.repository.UserRepository;
 import az.developia.springjava13.request.StudentAddRequest;
 import az.developia.springjava13.response.StudentResponse;
 import az.developia.springjava13.service.StudentService;
+import az.developia.springjava13.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
@@ -40,25 +44,26 @@ public class StudentRestController {
 	@Autowired
 	private StudentService service;
 
+	@Autowired
+	private UserService userService;
+
+	@Autowired
+	private TeacherRepository teacherRepository;
+
+	@Autowired
+	private AuthorityRepository authorityRepository;
+
+	@Autowired
+	private UserRepository userRepository;
+
 	@GetMapping
 //	@PreAuthorize(value = "hasAuthority('ROLE_GET_STUDENT')")
 	@ApiOperation(value = "Butun telebeleri qaytaran API ", notes = "Burada elave qeydler yazilir")
 	public StudentResponse getStudents() {
 		StudentResponse response = new StudentResponse();
 
-		List<StudentEntity> list = repository.findAll();
+		List<StudentEntity> list = service.findAll();
 
-//		List<StudentEntity> list = repository.findAllSearch("a", "b");
-//		asagidaki ile eyni isi gorur
-//		
-//		List<StudentEntity> filtered = list.stream().filter(s -> {
-//			boolean re = false;
-//			if (s.getName().contains("a") && s.getSurname().contains("b")) {
-//				re = true;
-//			}
-//			return re;
-//		}).collect(Collectors.toList());
-//
 		response.setStudents(list);
 
 		return response;
@@ -69,14 +74,13 @@ public class StudentRestController {
 	public StudentEntity findById(@PathVariable Integer id) {
 
 		if (id == null || id <= 0) {
-			throw new OurRuntimeException(null, "id mutleqdir");
+			throw new OurRuntimeException(null, "id 0");
 		}
 
-		return repository.findById(id).orElseThrow(() -> new OurRuntimeException(null, "bu id tapilmadi"));
+		return service.findById(id).orElseThrow(() -> new OurRuntimeException(null, "bu id tapilmadi"));
 
 	}
 
-//	@RequestBody arxada avtomatik olaraq studenti component annotasiyasina baglayir
 	@PostMapping(path = "/add")
 	@PreAuthorize(value = "hasAuthority('ROLE_ADD_STUDENT')")
 	public ResponseEntity<Object> add(@Valid @RequestBody StudentAddRequest dto, BindingResult br) {
@@ -88,7 +92,7 @@ public class StudentRestController {
 		return resp;
 	}
 
-	@PutMapping
+	@PutMapping(path = "update")
 	@PreAuthorize(value = "hasAuthority('ROLE_UPDATE_STUDENT')")
 	public void update(@Valid @RequestBody StudentEntity s, BindingResult br) {
 		if (br.hasErrors()) {
@@ -98,19 +102,8 @@ public class StudentRestController {
 		if (s.getId() == null || s.getId() <= 0) {
 			throw new OurRuntimeException(null, "id null olmaz");
 		}
-		StudentEntity st = new StudentEntity();
-		st.setId(s.getId());
-		st.setName(s.getName());
-		st.setSurname(s.getSurname());
 
-		if (repository.findById(s.getId()).isPresent()) {
-			repository.save(st);
-
-		} else {
-			throw new OurRuntimeException(null, "bu id tapilmadi");
-		}
-
-		repository.save(st);
+		service.update(s);
 
 	}
 
@@ -130,10 +123,10 @@ public class StudentRestController {
 			throw new OurRuntimeException(null, "id mutleqdir");
 		}
 
-		StudentEntity ent = repository.findById(id).orElseThrow(() -> new OurRuntimeException(null, "id tapilmadi "));
+		StudentEntity ent = service.findById(id).orElseThrow(() -> new OurRuntimeException(null, "id tapilmadi "));
 
 		if (ent.getTeacherId() == teacherId) {
-			repository.deleteById(id);
+			service.deleteById(id);
 			userRepository.deleteById(ent.getUsername());
 
 			authorityRepository.deleteUserAuthorities(ent.getUsername());
@@ -147,11 +140,11 @@ public class StudentRestController {
 	@PutMapping(path = "/update-me")
 	@PreAuthorize(value = "hasAuthority('ROLE_UPDATE_ME')")
 //	{username:'yeniUsername'}
-	public void updateMe(@RequestBody StudentUpdateMeDTO req) {
+	public void updateMe(@RequestBody StudentUpdateMeDTO req, BindingResult br) {
 		String newUsername = req.getUsername();
 
 		if (newUsername == null) {
-			// throw
+			throw new OurRuntimeException(br, "Username boşdur");
 		}
 
 //		bu kod emeliyyati edenin username i verir
@@ -160,11 +153,11 @@ public class StudentRestController {
 		if (newUsername.equals(username)) {
 			// throw
 		}
-		Optional<UserEntity> f = userRepository.findById(username);
+		Optional<UserEntity> f = userService.findById(username);
 		if (f.isPresent()) {
 			// throw
 		} else {
-			userRepository.updateMyUsername(username, newUsername);
+			userService.updateMyUsername(username, newUsername);
 		}
 
 	}
