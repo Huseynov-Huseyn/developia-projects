@@ -13,6 +13,9 @@ import az.developia.springjava13.exception.OurRuntimeException;
 import az.developia.springjava13.repository.AuthorityRepository;
 import az.developia.springjava13.repository.StudentRepository;
 import az.developia.springjava13.request.StudentAddRequest;
+import az.developia.springjava13.request.studentUpdateRequest;
+import az.developia.springjava13.response.StudentResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -48,40 +51,21 @@ public class StudentService {
 
 	}
 
-	public ResponseEntity<Object> update(StudentEntity s) {
-		StudentEntity st = new StudentEntity();
-		st.setId(s.getId());
-		st.setName(s.getName());
-		st.setSurname(s.getSurname());
-		st.setUsername(s.getUsername());
-		st.setTeacherId(s.getTeacherId());
+	public ResponseEntity<Object> update(@Valid studentUpdateRequest s) {
+		Optional<StudentEntity> id = repository.findById(s.getId());
 
-		if (repository.findById(s.getId()).isPresent()) {
-			repository.save(st);
-		} else {
-			throw new OurRuntimeException(null, "bu id tapilmadi");
-		}
-		repository.save(st);
-
-		return ResponseEntity.ok(null);
+		StudentEntity se = id.get();
+		repository.findById(s.getId()).ifPresentOrElse((a -> repository.save(se)),
+				() -> new OurRuntimeException(null, "id tapilmadi"));
+		return ResponseEntity.ok("tələbə yeniləndi");
 	}
 
-	public List<StudentEntity> findAll() {
-		List<StudentEntity> all = repository.findAll();
-		return all;
-	}
+	public ResponseEntity<Object> findAll() {
+		StudentResponse response = new StudentResponse();
+		List<StudentEntity> lis = repository.findAll();
+		response.setStudents(lis);
+		response.setUsername(securityService.findUsername());
 
-	public Optional<StudentEntity> findById(Integer id) {
-		Optional<StudentEntity> byId = repository.findById(id);
-		return byId;
+		return ResponseEntity.ok(response);
 	}
-
-	public void save(StudentEntity st) {
-		repository.save(st);
-	}
-
-	public void deleteById(Integer id) {
-		repository.deleteById(id);
-	}
-
 }

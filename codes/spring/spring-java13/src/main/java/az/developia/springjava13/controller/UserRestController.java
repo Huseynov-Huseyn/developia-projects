@@ -2,8 +2,6 @@ package az.developia.springjava13.controller;
 
 import java.util.Optional;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -31,6 +29,7 @@ import az.developia.springjava13.repository.StudentRepository;
 import az.developia.springjava13.repository.TeacherRepository;
 import az.developia.springjava13.repository.UserRepository;
 import az.developia.springjava13.request.StudentAddRequest;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(path = "/users")

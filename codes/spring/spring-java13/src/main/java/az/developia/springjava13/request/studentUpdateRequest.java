@@ -2,34 +2,34 @@ package az.developia.springjava13.request;
 
 import java.time.LocalDate;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import jakarta.validation.constraints.NotNull;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
-@Builder
-@ApiModel(description = "Telebe DTO")
-public class StudentAddRequest {
+@NoArgsConstructor
+public class studentUpdateRequest {
+
+	@Id
+	@Size(min = 1, message = "id 0 ve ya menfi ola bilmez!")
+	private Integer id;
 
 	@Size(min = 2, max = 40, message = "Ad min 2 max 40 ola biler")
-	@ApiModelProperty(notes = "Bura telebenin adidir")
 	private String name;
 
 	@Size(min = 2, max = 40, message = "Soyad min 2 max 40 ola biler")
 	private String surname;
 
 	@Size(min = 2, max = 20, message = "Username min 2 max 20 ola biler")
-	@NotNull
 	private String username;
 
 	@Size(min = 2, max = 20, message = "Password min 6 max 20 ola biler")
-	@NotNull
 	private String password;
 
 	@Past(message = "kecmis zaman olmalidir")

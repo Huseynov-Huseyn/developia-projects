@@ -15,7 +15,7 @@ public class TeacherService {
 
 	public TeacherEntity findByUsername(String username) {
 		TeacherEntity t = repository.findByUsername(username);
-		if (t==null) {
+		if (t == null) {
 			throw new OurRuntimeException(null, "muellim tapilmadi");
 		}
 		return t;

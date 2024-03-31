@@ -1,9 +1,6 @@
 package az.developia.springjava13.controller;
 
-import java.util.List;
 import java.util.Optional;
-
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,11 +26,12 @@ import az.developia.springjava13.repository.AuthorityRepository;
 import az.developia.springjava13.repository.TeacherRepository;
 import az.developia.springjava13.repository.UserRepository;
 import az.developia.springjava13.request.StudentAddRequest;
-import az.developia.springjava13.response.StudentResponse;
+import az.developia.springjava13.request.studentUpdateRequest;
 import az.developia.springjava13.service.StudentService;
 import az.developia.springjava13.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(path = "/students")
@@ -56,17 +54,15 @@ public class StudentRestController {
 	@Autowired
 	private UserRepository userRepository;
 
+//	COMPLETED
 	@GetMapping
 //	@PreAuthorize(value = "hasAuthority('ROLE_GET_STUDENT')")
 	@ApiOperation(value = "Butun telebeleri qaytaran API ", notes = "Burada elave qeydler yazilir")
-	public StudentResponse getStudents() {
-		StudentResponse response = new StudentResponse();
+	public ResponseEntity<Object> getStudents() {
 
-		List<StudentEntity> list = service.findAll();
+		ResponseEntity<Object> findAll = service.findAll();
+		return findAll;
 
-		response.setStudents(list);
-
-		return response;
 	}
 
 	@GetMapping(path = "/{id}")
@@ -94,16 +90,10 @@ public class StudentRestController {
 
 	@PutMapping(path = "update")
 	@PreAuthorize(value = "hasAuthority('ROLE_UPDATE_STUDENT')")
-	public void update(@Valid @RequestBody StudentEntity s, BindingResult br) {
-		if (br.hasErrors()) {
-			throw new OurRuntimeException(br, "melumatlarin tamligi pozulub");
-		}
+	public ResponseEntity<Object> update(@Valid @RequestBody studentUpdateRequest s, BindingResult br) {
 
-		if (s.getId() == null || s.getId() <= 0) {
-			throw new OurRuntimeException(null, "id null olmaz");
-		}
-
-		service.update(s);
+		ResponseEntity<Object> response = service.update(s);
+		return response;
 
 	}
 
