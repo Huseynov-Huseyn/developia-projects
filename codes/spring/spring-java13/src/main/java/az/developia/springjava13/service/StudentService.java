@@ -28,6 +28,26 @@ public class StudentService {
 
 	private final AuthorityRepository authorityRepository;
 
+	public ResponseEntity<Object> findAll() {
+		StudentResponse response = new StudentResponse();
+		List<StudentEntity> lis = repository.findAll();
+		response.setStudents(lis);
+		response.setUsername(securityService.findUsername());
+
+		return ResponseEntity.ok(response);
+	}
+
+	public ResponseEntity<Object> findById(Integer id) {
+		if (id == null || id <= 0) {
+			throw new OurRuntimeException(null, "id 0");
+		}
+
+		StudentEntity orElseThrow = repository.findById(id)
+				.orElseThrow(() -> new OurRuntimeException(null, "bu id tapilmadi"));
+		return ResponseEntity.ok(orElseThrow);
+
+	}
+
 	public ResponseEntity<Object> add(StudentAddRequest dto) {
 
 		TeacherEntity teacher = teacherService.findByUsername(securityService.findUsername());
@@ -60,12 +80,28 @@ public class StudentService {
 		return ResponseEntity.ok("tələbə yeniləndi");
 	}
 
-	public ResponseEntity<Object> findAll() {
-		StudentResponse response = new StudentResponse();
-		List<StudentEntity> lis = repository.findAll();
-		response.setStudents(lis);
-		response.setUsername(securityService.findUsername());
+	public ResponseEntity<Object> delete(Integer id) {
+		TeacherEntity operator = teacherService.findByUsername(securityService.findUsername());
+		if (operator == null) {
+			throw new OurRuntimeException(null, "muellim tapilmadi");
+		}
 
-		return ResponseEntity.ok(response);
+		Integer teacherId = operator.getId();
+
+		if (id == null || id <= 0) {
+			throw new OurRuntimeException(null, "id mutleqdir");
+		}
+
+		StudentEntity ent = repository.findById(id).orElseThrow(() -> new OurRuntimeException(null, "id tapilmadi "));
+
+		if (ent.getTeacherId() == teacherId) {
+			repository.deleteById(id);
+			userService.deleteById(ent.getUsername());
+			authorityRepository.deleteUserAuthorities(ent.getUsername());
+		} else {
+			throw new OurRuntimeException(null, "oz telebeni sil");
+		}
+
+		return ResponseEntity.ok(ent);
 	}
 }

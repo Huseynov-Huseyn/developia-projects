@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import az.developia.springjava13.dto.StudentUpdateMeDTO;
-import az.developia.springjava13.entity.StudentEntity;
-import az.developia.springjava13.entity.TeacherEntity;
 import az.developia.springjava13.entity.UserEntity;
 import az.developia.springjava13.exception.OurRuntimeException;
 import az.developia.springjava13.repository.AuthorityRepository;
@@ -65,18 +63,16 @@ public class StudentRestController {
 
 	}
 
+//COMPLETED
 	@GetMapping(path = "/{id}")
-	@PreAuthorize(value = "hasAuthority('ROLE_GET_STUDENT')")
-	public StudentEntity findById(@PathVariable Integer id) {
+//	@PreAuthorize(value = "hasAuthority('ROLE_GET_STUDENT')")
+	public ResponseEntity<Object> findById(@PathVariable Integer id) {
 
-		if (id == null || id <= 0) {
-			throw new OurRuntimeException(null, "id 0");
-		}
-
-		return service.findById(id).orElseThrow(() -> new OurRuntimeException(null, "bu id tapilmadi"));
-
+		ResponseEntity<Object> byId = service.findById(id);
+		return byId;
 	}
 
+//COMPLETED
 	@PostMapping(path = "/add")
 	@PreAuthorize(value = "hasAuthority('ROLE_ADD_STUDENT')")
 	public ResponseEntity<Object> add(@Valid @RequestBody StudentAddRequest dto, BindingResult br) {
@@ -88,43 +84,27 @@ public class StudentRestController {
 		return resp;
 	}
 
+//COMPLETED
 	@PutMapping(path = "update")
 	@PreAuthorize(value = "hasAuthority('ROLE_UPDATE_STUDENT')")
 	public ResponseEntity<Object> update(@Valid @RequestBody studentUpdateRequest s, BindingResult br) {
 
-		ResponseEntity<Object> response = service.update(s);
-		return response;
+		if (br.hasErrors()) {
+			throw new OurRuntimeException(br, "melumatlarin tamligi pozulub");
+		}
+
+		ResponseEntity<Object> res = service.update(s);
+		return res;
 
 	}
 
+	// COMPLETED
 	/// student/id
 	@DeleteMapping(path = "/{id}")
 	@PreAuthorize(value = "hasAuthority('ROLE_DELETE_STUDENT')")
-	public void delete(@PathVariable Integer id) {
-
-		String username = SecurityContextHolder.getContext().getAuthentication().getName();
-		TeacherEntity operator = teacherRepository.findByUsername(username);
-		if (operator == null) {
-			throw new OurRuntimeException(null, "muellim tapilmadi");
-		}
-		Integer teacherId = operator.getId();
-
-		if (id == null || id <= 0) {
-			throw new OurRuntimeException(null, "id mutleqdir");
-		}
-
-		StudentEntity ent = service.findById(id).orElseThrow(() -> new OurRuntimeException(null, "id tapilmadi "));
-
-		if (ent.getTeacherId() == teacherId) {
-			service.deleteById(id);
-			userRepository.deleteById(ent.getUsername());
-
-			authorityRepository.deleteUserAuthorities(ent.getUsername());
-		} else {
-
-			throw new OurRuntimeException(null, "oz telebeni sil");
-
-		}
+	public ResponseEntity<Object> delete(@PathVariable Integer id) {
+		ResponseEntity<Object> res = service.delete(id);
+		return res;
 	}
 
 	@PutMapping(path = "/update-me")
