@@ -1,11 +1,19 @@
 package az.developia.springjava13;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class SpringJava13Application {
+
+	@Bean
+	public ModelMapper modelMapper() {
+		ModelMapper obj = new ModelMapper();
+		return obj;
+	}
 
 	public static void main(String[] args) {
 		ConfigurableApplicationContext c = SpringApplication.run(SpringJava13Application.class, args);

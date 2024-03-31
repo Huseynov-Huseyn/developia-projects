@@ -3,6 +3,7 @@ package az.developia.springjava13.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,7 @@ public class StudentService {
 	private final SecurityService securityService;
 	private final TeacherService teacherService;
 	private final UserService userService;
+	private final ModelMapper modelMapper;
 
 	private final AuthorityRepository authorityRepository;
 
@@ -53,9 +55,10 @@ public class StudentService {
 		TeacherEntity teacher = teacherService.findByUsername(securityService.findUsername());
 
 		StudentEntity st = new StudentEntity();
+
 		st.setId(null);
-		st.setName(dto.getName());
-		st.setSurname(dto.getSurname());
+		modelMapper.map(dto, st);
+//		dtoda olan varaiblelari eyni adda tipde olanlari st kecirir
 		st.setTeacherId(teacher.getId());
 
 		repository.save(st);
