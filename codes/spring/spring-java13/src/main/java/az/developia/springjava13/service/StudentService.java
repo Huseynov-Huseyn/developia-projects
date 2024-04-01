@@ -33,6 +33,7 @@ public class StudentService {
 	public ResponseEntity<Object> findAll() {
 		StudentResponse response = new StudentResponse();
 		List<StudentEntity> lis = repository.findAll();
+
 		response.setStudents(lis);
 		response.setUsername(securityService.findUsername());
 
