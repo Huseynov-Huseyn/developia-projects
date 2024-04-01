@@ -1,8 +1,8 @@
 insert into users
 (username,password,enabled)
 values
-('Huseynov','{noop}123456','1');
-
+('Huseynov','$2a$12$DvD5XSlGn/qCXRH7s/oNg.9fpNJGUJdOOI/X89ViNGefyO.kR1/U2','1');
+--parol 1234
 insert into authorities
 (username,authority)
 values
