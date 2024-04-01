@@ -1,10 +1,10 @@
-function loadStudents(event){
+function loadStudents(){
 
     // bu obyekti apiye gonder
-    var xml=new XMLHttpRequest();
+    let xml=new XMLHttpRequest();
 
     xml.onload=function(){
-        var massiv= JSON.parse(this.responseText);
+        let massiv= JSON.parse(this.responseText);
         massiv.students.forEach(s => {
             document.getElementById('students').innerHTML+="<tr><td>"+s.id+"</td><td>"+s.name+"</td><td>"+s.surname+"</td></tr>";
         });
@@ -14,5 +14,4 @@ function loadStudents(event){
 
     xml.send();
 }
-
 loadStudents();

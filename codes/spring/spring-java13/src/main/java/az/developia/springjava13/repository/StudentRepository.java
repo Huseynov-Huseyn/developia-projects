@@ -21,4 +21,7 @@ public interface StudentRepository extends JpaRepository<StudentEntity, Integer>
 	@Query(value = "update username", nativeQuery = true)
 	@Modifying
 	void updateMyUsername(String username, String newUsername);
+
+	@Query(value = "select * from students limit ?1,?2", nativeQuery = true)
+	List<StudentEntity> findPagination(Integer begin, Integer length);
 }

@@ -54,7 +54,7 @@ public class StudentRestController {
 
 //	COMPLETED
 	@GetMapping
-//	@PreAuthorize(value = "hasAuthority('ROLE_GET_STUDENT')")
+	@PreAuthorize(value = "hasAuthority('ROLE_GET_STUDENT')")
 	@ApiOperation(value = "Butun telebeleri qaytaran API ", notes = "Burada elave qeydler yazilir")
 	public ResponseEntity<Object> getStudents() {
 
@@ -65,7 +65,7 @@ public class StudentRestController {
 
 //COMPLETED
 	@GetMapping(path = "/{id}")
-//	@PreAuthorize(value = "hasAuthority('ROLE_GET_STUDENT')")
+	@PreAuthorize(value = "hasAuthority('ROLE_GET_STUDENT')")
 	public ResponseEntity<Object> findById(@PathVariable Integer id) {
 
 		ResponseEntity<Object> byId = service.findById(id);
@@ -130,6 +130,19 @@ public class StudentRestController {
 			userService.updateMyUsername(username, newUsername);
 		}
 
+	}
+
+//	PAGGINATION DERSI 38
+//	/students/pagination/begin/3/length/5
+	@GetMapping(path = "/pagination/begin/{begin}/length/{}")
+	@PreAuthorize(value = "hasAuthority('ROLE_GET_STUDENT')")
+	public ResponseEntity<Object> findPagination(@PathVariable Integer begin, @PathVariable Integer length) {
+		if (length > 100) {
+			throw new OurRuntimeException(null, "uzunluq 100den cox ola bilmez");
+		}
+		ResponseEntity<Object> pagination = service.findPaginationMethod(begin, length);
+
+		return pagination;
 	}
 
 }

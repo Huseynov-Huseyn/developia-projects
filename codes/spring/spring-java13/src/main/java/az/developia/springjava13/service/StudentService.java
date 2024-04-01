@@ -107,4 +107,12 @@ public class StudentService {
 
 		return ResponseEntity.ok(ent);
 	}
+
+	public ResponseEntity<Object> findPaginationMethod(Integer begin, Integer length) {
+		StudentResponse response = new StudentResponse();
+		List<StudentEntity> pagination = repository.findPagination(begin, length);
+		response.setStudents(pagination);
+
+		return ResponseEntity.ok(response);
+	}
 }

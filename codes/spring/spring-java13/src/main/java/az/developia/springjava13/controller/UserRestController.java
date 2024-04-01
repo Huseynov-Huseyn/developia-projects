@@ -2,7 +2,7 @@ package az.developia.springjava13.controller;
 
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.modelmapper.ModelMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -30,33 +30,26 @@ import az.developia.springjava13.repository.TeacherRepository;
 import az.developia.springjava13.repository.UserRepository;
 import az.developia.springjava13.request.StudentAddRequest;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping(path = "/users")
 @CrossOrigin(origins = "*")
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
 //yuxaridaki annotasiyani yazanda autowiredda ehtiyac qalmadan repository isletmek olur ve yaxsi qaydasi budur
 public class UserRestController {
 
 //	private final TeacherRepository teacherRepository;
 
-	@Autowired
-	private TeacherRepository teacherRepository;
+	private final TeacherRepository teacherRepository;
+	private final UserRepository userRepository;
+	private final AuthorityRepository authorityRepository;
+	private final StudentRepository studentRepository;
 
-	@Autowired
-	private UserRepository userRepository;
+	private final ModelMapper modelMapper;
 
-	@Autowired
-	private AuthorityRepository authorityRepository;
-
-	@Autowired
-	private StudentRepository studentRepository;
-
-	@Autowired
-	private AuthorRepository authorRepository;
-
-	@Autowired
-	private BookRepository bookRepository;
+	private final AuthorRepository authorRepository;
+	private final BookRepository bookRepository;
 
 	@PostMapping(path = "/teacher")
 	public boolean createTeacher(@Valid @RequestBody TeacherDTO d) {
@@ -68,25 +61,21 @@ public class UserRestController {
 		}
 
 		TeacherEntity e = new TeacherEntity();
-		e.setId(d.getId());
-		e.setName(d.getName());
-		e.setSurname(d.getSurname());
-		e.setUsername(d.getUsername());
+		modelMapper.map(d, e);
 		teacherRepository.save(e);
 
 		UserEntity user = new UserEntity();
-		user.setUsername(d.getUsername());
+		modelMapper.map(d, user);
 
 		String raw = d.getPassword();
-		String pass = "{bcrypt}" + encoder.encode(raw);
+		String pass = encoder.encode(raw);
 		user.setPassword(pass);
-		user.setEmail(d.getEmail());
 		user.setEnabled(1);
 		user.setType("teacher");
 		userRepository.save(user);
 
 		AuthorityEntity a1 = new AuthorityEntity();
-		a1.setUsername(user.getUsername());
+		modelMapper.map(user, a1);
 		a1.setAuthority("ROLE_ADD_STUDENT");
 		authorityRepository.save(a1);
 
@@ -110,6 +99,7 @@ public class UserRestController {
 
 		StudentEntity e = new StudentEntity();
 		e.setName(d.getName());
+//		d e
 		e.setSurname(d.getSurname());
 		e.setUsername(d.getUsername());
 
