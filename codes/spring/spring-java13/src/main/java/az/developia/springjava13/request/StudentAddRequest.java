@@ -24,6 +24,7 @@ public class StudentAddRequest {
 
 	@Size(min = 2, max = 20, message = "Username min 2 max 20 ola biler")
 	@NotNull
+//	@Pattern(regexp = "[a-z_A-Z0-9]{1,50}",message = "ad 1-50 arasinda ola biler")
 	private String username;
 
 	@Size(min = 2, max = 20, message = "Password min 6 max 20 ola biler")
