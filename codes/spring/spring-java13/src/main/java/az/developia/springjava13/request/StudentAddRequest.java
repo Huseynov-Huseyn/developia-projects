@@ -2,8 +2,6 @@ package az.developia.springjava13.request;
 
 import java.time.LocalDate;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
@@ -14,11 +12,11 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Builder
-@ApiModel(description = "Telebe DTO")
+//@ApiModel(description = "Telebe DTO")
 public class StudentAddRequest {
 
 	@Size(min = 2, max = 40, message = "Ad min 2 max 40 ola biler")
-	@ApiModelProperty(notes = "Bura telebenin adidir")
+//	@ApiModelProperty(notes = "Bura telebenin adidir")
 	private String name;
 
 	@Size(min = 2, max = 40, message = "Soyad min 2 max 40 ola biler")

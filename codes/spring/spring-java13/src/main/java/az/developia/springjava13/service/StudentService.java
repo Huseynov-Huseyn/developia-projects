@@ -36,7 +36,6 @@ public class StudentService {
 
 		response.setStudents(lis);
 		response.setUsername(securityService.findUsername());
-
 		return ResponseEntity.ok(response);
 	}
 

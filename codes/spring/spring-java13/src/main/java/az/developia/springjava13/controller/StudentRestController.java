@@ -20,20 +20,15 @@ import org.springframework.web.bind.annotation.RestController;
 import az.developia.springjava13.dto.StudentUpdateMeDTO;
 import az.developia.springjava13.entity.UserEntity;
 import az.developia.springjava13.exception.OurRuntimeException;
-import az.developia.springjava13.repository.AuthorityRepository;
-import az.developia.springjava13.repository.TeacherRepository;
-import az.developia.springjava13.repository.UserRepository;
 import az.developia.springjava13.request.StudentAddRequest;
 import az.developia.springjava13.request.studentUpdateRequest;
 import az.developia.springjava13.service.StudentService;
 import az.developia.springjava13.service.UserService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(path = "/students")
-@Api(description = "Telebelerle bagli API-lar")
+//@Api(description = "Telebelerle bagli API-lar")
 @CrossOrigin(origins = "*")
 public class StudentRestController {
 
@@ -43,24 +38,21 @@ public class StudentRestController {
 	@Autowired
 	private UserService userService;
 
-	@Autowired
-	private TeacherRepository teacherRepository;
-
-	@Autowired
-	private AuthorityRepository authorityRepository;
-
-	@Autowired
-	private UserRepository userRepository;
+//	@Autowired
+//	private ViewRepository viewRepository;
 
 //	COMPLETED
 	@GetMapping
 	@PreAuthorize(value = "hasAuthority('ROLE_GET_STUDENT')")
-	@ApiOperation(value = "Butun telebeleri qaytaran API ", notes = "Burada elave qeydler yazilir")
+//	@ApiOperation(value = "Butun telebeleri qaytaran API ", notes = "Burada elave qeydler yazilir")
 	public ResponseEntity<Object> getStudents() {
 
 		ResponseEntity<Object> findAll = service.findAll();
-		return findAll;
 
+//		List<DemoEntity> all = viewRepository.findAll();
+//		System.out.println(all);
+
+		return findAll;
 	}
 
 //COMPLETED

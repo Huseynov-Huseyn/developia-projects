@@ -11,7 +11,7 @@ function loadStudents(){
     };
 
     xml.open('GET','http://localhost:8080/students',true);
-
+    
     xml.send();
 }
 loadStudents();
