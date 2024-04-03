@@ -1,9 +1,11 @@
 package az.developia.springjava13.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
@@ -18,10 +20,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import az.developia.springjava13.dto.StudentUpdateMeDTO;
+import az.developia.springjava13.entity.StudentEntity;
 import az.developia.springjava13.entity.UserEntity;
 import az.developia.springjava13.exception.OurRuntimeException;
+import az.developia.springjava13.filtering.DynamicFilteringDemo;
+import az.developia.springjava13.repository.StudentRepository;
 import az.developia.springjava13.request.StudentAddRequest;
 import az.developia.springjava13.request.studentUpdateRequest;
+import az.developia.springjava13.response.StudentListResponse;
 import az.developia.springjava13.service.StudentService;
 import az.developia.springjava13.service.UserService;
 import jakarta.validation.Valid;
@@ -36,7 +42,13 @@ public class StudentRestController {
 	private StudentService service;
 
 	@Autowired
+	private StudentRepository repository;
+
+	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private DynamicFilteringDemo dynamic;
 
 //	@Autowired
 //	private ViewRepository viewRepository;
@@ -45,18 +57,18 @@ public class StudentRestController {
 	@GetMapping
 	@PreAuthorize(value = "hasAuthority('ROLE_GET_STUDENT')")
 //	@ApiOperation(value = "Butun telebeleri qaytaran API ", notes = "Burada elave qeydler yazilir")
-	public ResponseEntity<Object> getStudents() {
-
-		ResponseEntity<Object> findAll = service.findAll();
-
-//		List<DemoEntity> all = viewRepository.findAll();
-//		System.out.println(all);
-
-		return findAll;
+	public StudentListResponse getStudents() {
+		if (service.getStudents() == null) {
+			StudentListResponse response = new StudentListResponse();
+			List<StudentEntity> entities = repository.findAll();
+			response.setStudents(service.convertEntitiesToDtos(entities));
+			service.setStudents(response);
+		}
+		return service.getStudents();
 	}
 
 //COMPLETED
-	@GetMapping(path = "/{id}")
+	@GetMapping(path = "/{id}", produces = { "application/json", "application/xml" })
 	@PreAuthorize(value = "hasAuthority('ROLE_GET_STUDENT')")
 	public ResponseEntity<Object> findById(@PathVariable Integer id) {
 
@@ -65,7 +77,7 @@ public class StudentRestController {
 	}
 
 //COMPLETED
-	@PostMapping(path = "/add")
+	@PostMapping(path = "/add", produces = { "application/json", "application/xml" })
 	@PreAuthorize(value = "hasAuthority('ROLE_ADD_STUDENT')")
 	public ResponseEntity<Object> add(@Valid @RequestBody StudentAddRequest dto, BindingResult br) {
 		if (br.hasErrors()) {
@@ -135,6 +147,27 @@ public class StudentRestController {
 		ResponseEntity<Object> pagination = service.findPaginationMethod(begin, length);
 
 		return pagination;
+	}
+
+	@GetMapping(path = "/id-name")
+	@PreAuthorize(value = "hasAuthority('ROLE_GET_STUDENT')")
+	public MappingJacksonValue getStudentIdName() {
+		StudentListResponse response = new StudentListResponse();
+		List<StudentEntity> entities = repository.findAll();
+		response.setStudents(service.convertEntitiesToDtos(entities));
+
+		return dynamic.filter("student", response, "id", "name");
+	}
+
+	@GetMapping(path = "/id-username")
+	@PreAuthorize(value = "hasAuthority('ROLE_GET_STUDENT')")
+	public MappingJacksonValue getStudentIdUsername() {
+		StudentListResponse response = new StudentListResponse();
+
+		List<StudentEntity> entities = repository.findAll();
+		response.setStudents(service.convertEntitiesToDtos(entities));
+
+		return dynamic.filter("student", response, "id", "username");
 	}
 
 }

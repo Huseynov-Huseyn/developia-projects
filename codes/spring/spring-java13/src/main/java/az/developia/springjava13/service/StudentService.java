@@ -1,5 +1,6 @@
 package az.developia.springjava13.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,16 +12,20 @@ import az.developia.springjava13.StudentAddResponse;
 import az.developia.springjava13.entity.StudentEntity;
 import az.developia.springjava13.entity.TeacherEntity;
 import az.developia.springjava13.exception.OurRuntimeException;
+import az.developia.springjava13.model.StudentResponseModel;
 import az.developia.springjava13.repository.AuthorityRepository;
 import az.developia.springjava13.repository.StudentRepository;
 import az.developia.springjava13.request.StudentAddRequest;
 import az.developia.springjava13.request.studentUpdateRequest;
+import az.developia.springjava13.response.StudentListResponse;
 import az.developia.springjava13.response.StudentResponse;
 import jakarta.validation.Valid;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
+@Data
 public class StudentService {
 	private final StudentRepository repository;
 	private final SecurityService securityService;
@@ -29,6 +34,8 @@ public class StudentService {
 	private final ModelMapper modelMapper;
 
 	private final AuthorityRepository authorityRepository;
+
+	private StudentListResponse students;
 
 	public ResponseEntity<Object> findAll() {
 		StudentResponse response = new StudentResponse();
@@ -114,5 +121,17 @@ public class StudentService {
 		response.setStudents(pagination);
 
 		return ResponseEntity.ok(response);
+	}
+
+	public List<StudentResponseModel> convertEntitiesToDtos(List<StudentEntity> entities) {
+		List<StudentResponseModel> dtos = new ArrayList<>();
+
+		for (StudentEntity entity : entities) {
+			StudentResponseModel dto = new StudentResponseModel();
+			modelMapper.map(entity, dto);
+			dtos.add(dto);
+		}
+
+		return dtos;
 	}
 }
