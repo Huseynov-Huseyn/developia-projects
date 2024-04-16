@@ -138,7 +138,7 @@ public class StudentRestController {
 
 //	PAGGINATION DERSI 38
 //	/students/pagination/begin/3/length/5
-	@GetMapping(path = "/pagination/begin/{begin}/length/{}")
+	@GetMapping(path = "/pagination/begin/{begin}/length/{length}")
 	@PreAuthorize(value = "hasAuthority('ROLE_GET_STUDENT')")
 	public ResponseEntity<Object> findPagination(@PathVariable Integer begin, @PathVariable Integer length) {
 		if (length > 100) {

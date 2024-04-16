@@ -116,6 +116,9 @@ public class StudentService {
 	}
 
 	public ResponseEntity<Object> findPaginationMethod(Integer begin, Integer length) {
+		if (length > 100) {
+			throw new OurRuntimeException(null, "Uzunluq 100den cox ola bilməz");
+		}
 		StudentResponse response = new StudentResponse();
 		List<StudentEntity> pagination = repository.findPagination(begin, length);
 		response.setStudents(pagination);
