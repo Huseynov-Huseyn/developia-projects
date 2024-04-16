@@ -30,12 +30,24 @@ public class SecurityConfig {
 		JdbcDaoImpl jdbcDao = new JdbcDaoImpl();
 		jdbcDao.setDataSource(dataSource);
 		return jdbcDao;
+//		kodu dataSourcedan goturmesi lazim olgunu gosterir
+
 	}
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		return http.csrf().disable().authorizeRequests().requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-				.anyRequest().authenticated().and().httpBasic().and().headers().frameOptions().disable().and().build();
+//		Authority fixleme ucundu
+		return http.csrf().disable().
+
+				authorizeRequests().
+
+				requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+
+				.anyRequest().authenticated().and().httpBasic()
+
+				.and().headers().frameOptions().disable()
+
+				.and().build();
 	}
 
 	@Bean
@@ -43,6 +55,7 @@ public class SecurityConfig {
 		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
 		authProvider.setUserDetailsService(userDetailsService());
 		authProvider.setPasswordEncoder(passwordEncoder());
+//		buradaki kod {noop} ve ya {bcrypt} yazmaga ehtiyyac qalmadan DB-de kodlari oldugu kimi yazmagimiza imkan yaradir
 		return authProvider;
 	}
 
