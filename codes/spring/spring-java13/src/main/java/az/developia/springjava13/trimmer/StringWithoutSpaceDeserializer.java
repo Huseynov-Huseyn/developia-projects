@@ -19,5 +19,6 @@ public class StringWithoutSpaceDeserializer extends StdDeserializer<String> {
 	@Override
 	public String deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
 		return p.getText() != null ? p.getText().trim() : null;
+//		Əsas işi buradakı metod görür(TRIM())
 	}
 }

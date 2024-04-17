@@ -9,6 +9,6 @@ import org.springframework.stereotype.Component;
 public class MyAop {
 	@Before(value = "execution (* az.developia.springjava13.service.*.find*(..))")
 	public void doIt() {
-		System.out.println("Tapdin");
+		System.out.println("AOP before has done");
 	}
 }

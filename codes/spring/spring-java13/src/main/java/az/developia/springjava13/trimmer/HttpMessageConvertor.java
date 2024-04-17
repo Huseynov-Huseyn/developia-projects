@@ -30,6 +30,8 @@ public class HttpMessageConvertor implements WebMvcConfigurer {
 		module.addDeserializer(String.class, new StringWithoutSpaceDeserializer(String.class));
 		mapper.registerModule(module);
 
+//		Əsas işi görən StringWithoutSpaceDeserializerdaki metoddur 
+
 		converter.setObjectMapper(mapper);
 
 		return converter;

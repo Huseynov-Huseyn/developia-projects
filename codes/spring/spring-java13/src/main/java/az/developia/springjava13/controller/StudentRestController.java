@@ -170,4 +170,5 @@ public class StudentRestController {
 		return dynamic.filter("student", response, "id", "username");
 	}
 
+	private StudentListResponse students;
 }

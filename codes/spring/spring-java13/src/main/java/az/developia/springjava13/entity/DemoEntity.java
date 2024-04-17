@@ -13,9 +13,9 @@ import lombok.ToString;
 @Table(name = "my_view")
 @Setter
 @Getter
-@Immutable
 @ToString
-//view bagli classlarda immutable yazilmalidir
+@Immutable
+//view bagli classlarda immutable yazilmalidir ki deyisilmeler edilmesin 
 public class DemoEntity {
 
 	@Id
