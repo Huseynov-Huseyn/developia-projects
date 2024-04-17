@@ -1,5 +1,12 @@
 package az.developia.springjava13.entity;
 
+import java.time.LocalDate;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,6 +36,11 @@ public class StudentEntity {
 	private String surname;
 
 	private String username;
+
+	@JsonSerialize(using = LocalDateSerializer.class)
+	@JsonDeserialize(using = LocalDateDeserializer.class)
+//	Setter ve Getter ler normalda islemir deye bunlari yazdiq
+	private LocalDate birthday;
 
 	private Integer teacherId;
 

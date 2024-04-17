@@ -2,6 +2,11 @@ package az.developia.springjava13.request;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -31,6 +36,9 @@ public class StudentAddRequest {
 	private String password;
 
 	@Past(message = "kecmis zaman olmalidir")
+	@JsonSerialize(using = LocalDateSerializer.class)
+	@JsonDeserialize(using = LocalDateDeserializer.class)
+//	Setter ve Getter ler normalda islemir deye bunlari yazdiq
 	private LocalDate birthday;
 
 //	@Pattern(regexp = "[\w-\.]+@([\w-]+\.)+[\w-]{2,4}", message = "emaili duz yaz")

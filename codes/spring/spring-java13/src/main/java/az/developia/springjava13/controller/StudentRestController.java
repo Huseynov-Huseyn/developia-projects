@@ -167,7 +167,7 @@ public class StudentRestController {
 		List<StudentEntity> entities = repository.findAll();
 		response.setStudents(service.convertEntitiesToDtos(entities));
 
-		return dynamic.filter("student", response, "id", "username");
+		return dynamic.filter("student", response, "id", "username", "birthday");
 	}
 
 	private StudentListResponse students;
