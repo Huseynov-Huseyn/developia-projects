@@ -3,8 +3,8 @@ package az.developia.springjava13.component;
 import java.util.Arrays;
 import java.util.List;
 
-import jakarta.validation.ConstraintValidator;
-import jakarta.validation.ConstraintValidatorContext;
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
 
 public class UserTypeValidator implements ConstraintValidator<ValidationUserType, String> {
 

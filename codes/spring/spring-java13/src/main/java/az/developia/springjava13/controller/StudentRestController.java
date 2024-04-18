@@ -3,6 +3,10 @@ package az.developia.springjava13.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJacksonValue;
@@ -30,7 +34,6 @@ import az.developia.springjava13.request.studentUpdateRequest;
 import az.developia.springjava13.response.StudentListResponse;
 import az.developia.springjava13.service.StudentService;
 import az.developia.springjava13.service.UserService;
-import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(path = "/students")
@@ -49,6 +52,8 @@ public class StudentRestController {
 
 	@Autowired
 	private DynamicFilteringDemo dynamic;
+
+	private Logger logger = LoggerFactory.getLogger(StudentRestController.class);
 
 //	@Autowired
 //	private ViewRepository viewRepository;
@@ -77,14 +82,15 @@ public class StudentRestController {
 	}
 
 //COMPLETED
-	@PostMapping(path = "/add", produces = { "application/json", "application/xml" })
+//	@PostMapping(path = "/add", produces = { "application/json", "application/xml" })
+	@PostMapping
 	@PreAuthorize(value = "hasAuthority('ROLE_ADD_STUDENT')")
 	public ResponseEntity<Object> add(@Valid @RequestBody StudentAddRequest dto, BindingResult br) {
 		if (br.hasErrors()) {
 			throw new OurRuntimeException(br, "melumatlarin tamligi pozulub");
 		}
 		ResponseEntity<Object> resp = service.add(dto);
-
+		logger.debug(" student add - " + dto);
 		return resp;
 	}
 
