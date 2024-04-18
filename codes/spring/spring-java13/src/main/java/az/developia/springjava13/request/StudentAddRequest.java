@@ -2,13 +2,14 @@ package az.developia.springjava13.request;
 
 import java.time.LocalDate;
 
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
+
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
-import jakarta.validation.constraints.Past;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -2,9 +2,10 @@ package az.developia.springjava13.request;
 
 import java.time.LocalDate;
 
-import jakarta.persistence.Id;
-import jakarta.validation.constraints.Past;
-import jakarta.validation.constraints.Size;
+import javax.persistence.Id;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

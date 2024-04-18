@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -19,7 +21,6 @@ import az.developia.springjava13.request.StudentAddRequest;
 import az.developia.springjava13.request.studentUpdateRequest;
 import az.developia.springjava13.response.StudentListResponse;
 import az.developia.springjava13.response.StudentResponse;
-import jakarta.validation.Valid;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
