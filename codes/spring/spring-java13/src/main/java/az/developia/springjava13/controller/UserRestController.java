@@ -5,9 +5,6 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -54,7 +51,7 @@ public class UserRestController {
 
 	@PostMapping(path = "/teacher")
 	public boolean createTeacher(@Valid @RequestBody TeacherDTO d) {
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+//		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		Optional<UserEntity> findById = userRepository.findById(d.getUsername());
 
 		if (findById.isPresent()) {
@@ -69,8 +66,8 @@ public class UserRestController {
 		modelMapper.map(d, user);
 
 		String raw = d.getPassword();
-		String pass = encoder.encode(raw);
-		user.setPassword(pass);
+//		String pass = encoder.encode(raw);
+//		user.setPassword(pass);
 		user.setEnabled(1);
 		user.setType("teacher");
 		userRepository.save(user);
@@ -84,13 +81,13 @@ public class UserRestController {
 	}
 
 	@PostMapping(path = "/student")
-	@PreAuthorize(value = "hasAuthority('ROLE_ADD_STUDENT')")
+//	@PreAuthorize(value = "hasAuthority('ROLE_ADD_STUDENT')")
 	public boolean createStudent(@Valid @RequestBody StudentAddRequest d, BindingResult br) {
 		if (br.hasErrors()) {
 			throw new OurRuntimeException(br, "melumatlarin tamligi pozulub");
 		}
 
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+//		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		Optional<UserEntity> findById = userRepository.findById(d.getUsername());
 
 		if (findById.isPresent()) {
@@ -104,19 +101,19 @@ public class UserRestController {
 		e.setSurname(d.getSurname());
 		e.setUsername(d.getUsername());
 
-		String username = SecurityContextHolder.getContext().getAuthentication().getName();
-		TeacherEntity operatorTeacher = teacherRepository.findByUsername(username);
-		Integer teacherId = operatorTeacher.getId();
+//		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+//		TeacherEntity operatorTeacher = teacherRepository.findByUsername(username);
+//		Integer teacherId = operatorTeacher.getId();
 
-		e.setTeacherId(teacherId);
+		e.setTeacherId(12312412);
 		studentRepository.save(e);
 
 		UserEntity user = new UserEntity();
 		user.setUsername(d.getUsername());
 
 		String raw = d.getPassword();
-		String pass = "{bcrypt}" + encoder.encode(raw);
-		user.setPassword(pass);
+//		String pass = "{bcrypt}" + encoder.encode(raw);
+//		user.setPassword(pass);
 		user.setEmail(d.getEmail());
 		user.setEnabled(1);
 		user.setType("student");
@@ -132,7 +129,7 @@ public class UserRestController {
 
 	@PostMapping(path = "/author")
 	public void createAuthor(@Valid @RequestBody AuthorDTO a) {
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+//		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
 		Optional<UserEntity> findById = userRepository.findById(a.getUsername());
 		if (findById.isPresent()) {
@@ -151,9 +148,9 @@ public class UserRestController {
 		user.setUsername(a.getUsername());
 
 		String raw = a.getPassword();
-		String pass = "{bcrypt}" + encoder.encode(raw);
+//		String pass = "{bcrypt}" + encoder.encode(raw);
 
-		user.setPassword(pass);
+//		user.setPassword(pass);
 		user.setEmail(a.getEmail());
 		user.setEnabled(1);
 		user.setType("Author");

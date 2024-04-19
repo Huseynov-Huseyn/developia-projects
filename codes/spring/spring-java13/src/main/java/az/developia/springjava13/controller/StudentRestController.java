@@ -1,7 +1,6 @@
 package az.developia.springjava13.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -10,8 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJacksonValue;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import az.developia.springjava13.dto.StudentUpdateMeDTO;
 import az.developia.springjava13.entity.StudentEntity;
-import az.developia.springjava13.entity.UserEntity;
 import az.developia.springjava13.exception.OurRuntimeException;
 import az.developia.springjava13.filtering.DynamicFilteringDemo;
 import az.developia.springjava13.repository.StudentRepository;
@@ -60,7 +56,7 @@ public class StudentRestController {
 
 //	COMPLETED
 	@GetMapping
-	@PreAuthorize(value = "hasAuthority('ROLE_GET_STUDENT')")
+//	@PreAuthorize(value = "hasAuthority('ROLE_GET_STUDENT')")
 //	@ApiOperation(value = "Butun telebeleri qaytaran API ", notes = "Burada elave qeydler yazilir")
 	public StudentListResponse getStudents() {
 		if (service.getStudents() == null) {
@@ -74,7 +70,7 @@ public class StudentRestController {
 
 //COMPLETED
 	@GetMapping(path = "/{id}", produces = { "application/json", "application/xml" })
-	@PreAuthorize(value = "hasAuthority('ROLE_GET_STUDENT')")
+//	@PreAuthorize(value = "hasAuthority('ROLE_GET_STUDENT')")
 	public ResponseEntity<Object> findById(@PathVariable Integer id) {
 
 		ResponseEntity<Object> byId = service.findById(id);
@@ -84,7 +80,7 @@ public class StudentRestController {
 //COMPLETED
 //	@PostMapping(path = "/add", produces = { "application/json", "application/xml" })
 	@PostMapping
-	@PreAuthorize(value = "hasAuthority('ROLE_ADD_STUDENT')")
+//	@PreAuthorize(value = "hasAuthority('ROLE_ADD_STUDENT')")
 	public ResponseEntity<Object> add(@Valid @RequestBody StudentAddRequest dto, BindingResult br) {
 		if (br.hasErrors()) {
 			throw new OurRuntimeException(br, "melumatlarin tamligi pozulub");
@@ -96,7 +92,7 @@ public class StudentRestController {
 
 //COMPLETED
 	@PutMapping(path = "update")
-	@PreAuthorize(value = "hasAuthority('ROLE_UPDATE_STUDENT')")
+//	@PreAuthorize(value = "hasAuthority('ROLE_UPDATE_STUDENT')")
 	public ResponseEntity<Object> update(@Valid @RequestBody studentUpdateRequest s, BindingResult br) {
 
 		if (br.hasErrors()) {
@@ -111,14 +107,14 @@ public class StudentRestController {
 	// COMPLETED
 	/// student/id
 	@DeleteMapping(path = "/{id}")
-	@PreAuthorize(value = "hasAuthority('ROLE_DELETE_STUDENT')")
+//	@PreAuthorize(value = "hasAuthority('ROLE_DELETE_STUDENT')")
 	public ResponseEntity<Object> delete(@PathVariable Integer id) {
 		ResponseEntity<Object> res = service.delete(id);
 		return res;
 	}
 
 	@PutMapping(path = "/update-me")
-	@PreAuthorize(value = "hasAuthority('ROLE_UPDATE_ME')")
+//	@PreAuthorize(value = "hasAuthority('ROLE_UPDATE_ME')")
 //	{username:'yeniUsername'}
 	public void updateMe(@RequestBody StudentUpdateMeDTO req, BindingResult br) {
 		String newUsername = req.getUsername();
@@ -128,24 +124,24 @@ public class StudentRestController {
 		}
 
 //		bu kod emeliyyati edenin username i verir
-		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+//		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 
-		if (newUsername.equals(username)) {
-			// throw
-		}
-		Optional<UserEntity> f = userService.findById(username);
-		if (f.isPresent()) {
-			// throw
-		} else {
-			userService.updateMyUsername(username, newUsername);
-		}
+//		if (newUsername.equals(username)) {
+		// throw
+//		}
+//		Optional<UserEntity> f = userService.findById(username);
+//		if (f.isPresent()) {
+//			// throw
+//		} else {
+//			userService.updateMyUsername(username, newUsername);
+//		}
 
 	}
 
 //	PAGGINATION DERSI 38
 //	/students/pagination/begin/3/length/5
 	@GetMapping(path = "/pagination/begin/{begin}/length/{length}")
-	@PreAuthorize(value = "hasAuthority('ROLE_GET_STUDENT')")
+//	@PreAuthorize(value = "hasAuthority('ROLE_GET_STUDENT')")
 	public ResponseEntity<Object> findPagination(@PathVariable Integer begin, @PathVariable Integer length) {
 		if (length > 100) {
 			throw new OurRuntimeException(null, "uzunluq 100den cox ola bilmez");
@@ -156,7 +152,7 @@ public class StudentRestController {
 	}
 
 	@GetMapping(path = "/id-name")
-	@PreAuthorize(value = "hasAuthority('ROLE_GET_STUDENT')")
+//	@PreAuthorize(value = "hasAuthority('ROLE_GET_STUDENT')")
 	public MappingJacksonValue getStudentIdName() {
 		StudentListResponse response = new StudentListResponse();
 		List<StudentEntity> entities = repository.findAll();
@@ -166,7 +162,7 @@ public class StudentRestController {
 	}
 
 	@GetMapping(path = "/id-username")
-	@PreAuthorize(value = "hasAuthority('ROLE_GET_STUDENT')")
+//	@PreAuthorize(value = "hasAuthority('ROLE_GET_STUDENT')")
 	public MappingJacksonValue getStudentIdUsername() {
 		StudentListResponse response = new StudentListResponse();
 
