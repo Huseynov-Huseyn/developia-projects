@@ -1,1 +1,0 @@
-2024-04-19 04:30:35,409 WARN org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver [http-nio-8080-exec-8] Resolved [org.springframework.web.bind.MissingRequestHeaderException: Required request header 'range' for method parameter type String is not present]
