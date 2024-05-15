@@ -111,5 +111,6 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<finalName>java13</finalName>
 	</build>
 </project>

@@ -8,7 +8,6 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-
 public class OurRuntimeException extends RuntimeException {
 	// global error response
 

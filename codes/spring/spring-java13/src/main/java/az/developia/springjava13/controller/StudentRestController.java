@@ -91,7 +91,7 @@ public class StudentRestController {
 	}
 
 //COMPLETED
-	@PutMapping(path = "update")
+	@PutMapping(path = "/update")
 //	@PreAuthorize(value = "hasAuthority('ROLE_UPDATE_STUDENT')")
 	public ResponseEntity<Object> update(@Valid @RequestBody studentUpdateRequest s, BindingResult br) {
 
